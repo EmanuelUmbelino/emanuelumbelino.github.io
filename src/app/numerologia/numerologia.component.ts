@@ -7,28 +7,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumerologiaComponent implements OnInit {
 
-  nome: string = '';
-  valores: { letra: string, numero: number }[] = [];
-  final: { numero: number, soma: number };
+  texto: string = '';
+  frase: frase;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  calcularLetras(refNome: string) {
-    const nome = this.removeAcento(refNome);
+  calcularPorPalavra(refFrase: string) {
+    const palavras = refFrase.trim().split(' ');
+    const frase: frase = {
+      frase: refFrase.toUpperCase(),
+      numero: 0,
+      soma: 0,
+      palavras: []
+    }
+    palavras.forEach(p => {
+      let palavra = this.calcularPorLetras(p);
+      frase.numero += palavra.soma;
+      frase.palavras.push(palavra);
+    });
+    frase.soma = this.somarDigitos(frase.numero);
+
+    this.frase = frase;
+  }
+
+  calcularPorLetras(refPalavra: string): palavra {
+    const palavra = this.removeAcento(refPalavra);
     let total = 0;
     let valores = [];
-    for (let i = 0; i < nome.length; i++) {
-      let letra = nome[i];
+    for (let i = 0; i < palavra.length; i++) {
+      let letra = palavra[i];
       let numero = this.somarDigitos(letra.charCodeAt(0) - 64);
       total += numero;
       valores.push({ letra: letra, numero: numero });
     }
 
-    this.valores = valores;
-    this.final = { numero: total, soma: this.somarDigitos(total) };
+    return {
+      palavra: refPalavra.toUpperCase(),
+      numero: total, soma: this.somarDigitos(total),
+      letras: valores
+    }
   }
 
   somarDigitos(n) {
@@ -47,4 +67,23 @@ export class NumerologiaComponent implements OnInit {
     return text;
   }
 
+}
+
+interface letra {
+  letra: string,
+  numero: number,
+}
+
+interface palavra {
+  palavra: string,
+  numero: number,
+  soma: number,
+  letras: letra[]
+}
+
+interface frase {
+  frase: string,
+  numero: number,
+  soma: number,
+  palavras: palavra[]
 }

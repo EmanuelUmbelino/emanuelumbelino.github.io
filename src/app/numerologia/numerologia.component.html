@@ -3,19 +3,24 @@
         <div>
             <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Nome</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="nome">
+                <input matInput placeholder="Placeholder" [(ngModel)]="texto">
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="calcularLetras(nome)">Calcular</button>
+            <button mat-raised-button color="primary" (click)="calcularPorPalavra(texto)">Calcular</button>
         </div>
         <br>
-        <div *ngFor="let v of valores">
-            {{v.letra}} -> {{v.numero}}
-        </div>
-        <br><br>
-        <div *ngIf="final !== undefined">
+        <div *ngIf="frase !== undefined">
+            <b>{{ frase.frase }}</b>
+            <div *ngFor="let p of frase.palavras">
+                <mat-divider></mat-divider>
+                <b>{{ p.palavra }}</b>
+                <div *ngFor="let l of p.letras">
+                    {{ l.letra }} -> {{ l.numero }}
+                </div>
+                Total {{ p.numero }} -> {{ p.soma }}
+            </div>
+            <mat-divider></mat-divider>
             Total
-            <br>
-            {{final.numero}} -> {{final.soma}}
+            {{ frase.numero }} -> {{ frase.soma }}
         </div>
     </mat-card>
 </div>
