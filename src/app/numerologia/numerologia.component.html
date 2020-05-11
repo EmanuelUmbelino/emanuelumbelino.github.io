@@ -1,1 +1,21 @@
-<p>numerologia works!</p>
+<div style="padding: 25px; height: 100%;">
+    <mat-card style="width: 50%;  margin: auto;">
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Placeholder" [(ngModel)]="nome">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="calcularLetras(nome)">Calcular</button>
+        </div>
+        <br>
+        <div *ngFor="let v of valores">
+            {{v.letra}} -> {{v.numero}}
+        </div>
+        <br><br>
+        <div *ngIf="final !== undefined">
+            Total
+            <br>
+            {{final.numero}} -> {{final.soma}}
+        </div>
+    </mat-card>
+</div>
