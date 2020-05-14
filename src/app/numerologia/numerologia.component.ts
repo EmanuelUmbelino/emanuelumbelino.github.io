@@ -23,7 +23,7 @@ export class NumerologiaComponent implements OnInit {
   }
 
   calcularPorPalavra(refFrase: string) {
-    const palavras = refFrase.trim().split(' ');
+    const palavras = refFrase.trim().replace(/\s\s+/g, ' ').split(' ');
     const frase: frase = {
       frase: refFrase.toLowerCase(),
       numero: 0,
@@ -41,28 +41,47 @@ export class NumerologiaComponent implements OnInit {
   }
 
   calcularPorLetras(refPalavra: string): palavra {
-    const palavra = this.removeAcento(refPalavra);
-    let total = 0;
-    let valores = [];
-    for (let i = 0; i < palavra.length; i++) {
-      let letra = palavra[i];
-      let numero = this.somarDigitos(letra.charCodeAt(0) - 64);
-      total += numero;
-      valores.push({ letra: letra, numero: numero });
-    }
+    const p: palavra = {
+      palavra: this.removeAcento(refPalavra),
+      numero: 0,
+      soma: 0,
+      letras: [],
+      consoantes: { soma: 0, numero: 0, letras: [] },
+      vogais: { soma: 0, numero: 0, letras: [] },
+    };
 
-    return {
-      palavra: refPalavra.toLowerCase(),
-      numero: this.somarDigitos(total), soma: total,
-      letras: valores
+    for (let i = 0; i < p.palavra.length; i++) {
+      let l: letra = {
+        letra: p.palavra[i],
+        numero: this.somarDigitos(p.palavra[i].charCodeAt(0) - 64)
+      };
+      p.soma += l.numero;
+      p.letras.push(l);
+      if (this.esVogal(l.letra)) {
+        p.vogais.letras.push(l);
+        p.vogais.soma += l.numero;
+      } else {
+        p.consoantes.letras.push(l);
+        p.consoantes.soma += l.numero;
+      }
     }
+    p.palavra = refPalavra.toLowerCase();
+    p.numero = this.somarDigitos(p.soma);
+    p.vogais.numero = this.somarDigitos(p.vogais.soma);
+    p.consoantes.numero = this.somarDigitos(p.consoantes.soma);
+
+    return p;
   }
 
-  somarDigitos(n) {
+  somarDigitos(n): number {
     return (n - 1) % 9 + 1;
   }
 
-  esNumeroMestre(n) {
+  esVogal(c): boolean {
+    return 'AEIOU'.includes(c);
+  }
+
+  esNumeroMestre(n): boolean {
     if (n < 11) {
       return false;
     }
@@ -71,7 +90,7 @@ export class NumerologiaComponent implements OnInit {
     return Number.isInteger(n / nUns);
   }
 
-  removeAcento(text) {
+  removeAcento(text): string {
     text = text.toUpperCase();
     text = text.replace(/[ÁÀÂÃ]/g, 'A');
     text = text.replace(/[ÉÈÊ]/g, 'E');
@@ -90,11 +109,16 @@ interface letra {
   numero: number,
 }
 
-interface palavra {
-  palavra: string,
+interface conjunto {
   numero: number,
   soma: number,
-  letras: letra[]
+  letras: letra[],
+}
+
+interface palavra extends conjunto {
+  palavra: string,
+  vogais: conjunto,
+  consoantes: conjunto,
 }
 
 interface frase {
