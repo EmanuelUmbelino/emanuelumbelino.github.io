@@ -1,72 +1,54 @@
-<div style="padding: 25px;">
-	<mat-card style="margin: auto;">
+<div class="p-page">
+	<mat-card class="m-auto">
 		<div>
-			<mat-form-field appearance="outline" style="width: 100%;">
+			<mat-form-field appearance="outline" class="w-100">
 				<mat-label>Nome</mat-label>
 				<input matInput placeholder="Placeholder" [(ngModel)]="texto">
 			</mat-form-field>
 			<button mat-raised-button color="primary" (click)="calcularPorPalavra(texto)">Calcular</button>
 		</div>
 		<br>
-		<div *ngIf="frase !== undefined">
-			<mat-card style="margin: auto;">
-				<mat-card-title style="text-transform: capitalize;">{{ frase.frase }}</mat-card-title>
-				<mat-card-subtitle>
-					Número
-					<span matBadge="M" [matBadgeHidden]="!esNumeroMestre(frase.soma)" matBadgeDescription="Número Mestre"
-						matBadgeOverlap="false" matBadgePosition="below">
-						{{ esNumeroMestre(frase.soma) ? frase.soma : frase.numero }}
-					</span>
-				</mat-card-subtitle>
-				<mat-card-content>
-					<mat-accordion>
-						<mat-expansion-panel *ngFor="let p of frase.palavras">
-							<mat-expansion-panel-header>
-								<mat-panel-title style="text-transform: capitalize;">
-									{{ p.palavra }}
-								</mat-panel-title>
-								<mat-panel-description>
-									Número&nbsp;
-									<span matBadge="M" [matBadgeHidden]="!esNumeroMestre(p.soma)" matBadgeDescription="Número Mestre"
-										matBadgeOverlap="false">
-										{{ esNumeroMestre(p.soma) ? p.soma : p.numero }}
-									</span>
-								</mat-panel-description>
-							</mat-expansion-panel-header>
+		<mat-card class="mat-elevation-z3 m-auto" *ngIf="frase !== undefined">
+			<mat-card-title style="text-transform: capitalize;">{{ frase.frase }}</mat-card-title>
+			<mat-card-subtitle>
+				Número
+				<span matBadge="M" [matBadgeHidden]="!esNumeroMestre(frase.soma)" matBadgeDescription="Número Mestre"
+					matBadgeOverlap="false" matBadgePosition="below">
+					{{ esNumeroMestre(frase.soma) ? frase.soma : frase.numero }}
+				</span>
+			</mat-card-subtitle>
+			<mat-card-content>
+				<mat-accordion>
+					<mat-expansion-panel *ngFor="let p of frase.palavras">
+						<mat-expansion-panel-header>
+							<mat-panel-title class="text-capitalize">
+								{{ p.palavra }}
+							</mat-panel-title>
+							<mat-panel-description>
+								Número&nbsp;
+								<span matBadge="M" [matBadgeHidden]="!esNumeroMestre(p.soma)" matBadgeDescription="Número Mestre"
+									matBadgeOverlap="false">
+									{{ esNumeroMestre(p.soma) ? p.soma : p.numero }}
+								</span>
+							</mat-panel-description>
+						</mat-expansion-panel-header>
 
-							<div *ngFor="let l of p.letras" class="font-number">
-								{{ l.letra }}
-								<mat-icon class="icon-center">arrow_right</mat-icon>
-								{{ l.numero }}
-							</div>
-						</mat-expansion-panel>
-					</mat-accordion>
-
-				</mat-card-content>
-			</mat-card>
-			<!-- <div *ngIf="frase.palavras.length > 1; else elseBlock">
-                <b>{{ frase.frase }}</b>
-                <div *ngFor="let p of frase.palavras">
-                    <mat-divider></mat-divider>
-                    <b>{{ p.palavra }}</b>
-                    <div *ngFor="let l of p.letras">
-                        {{ l.letra }} -> {{ l.numero }}
-                    </div>
-                    Total {{ p.soma }} -> {{ p.numero }}
-                </div>
-                <mat-divider></mat-divider>
-                Total
-                {{ frase.soma }} -> {{ frase.numero }}
-            </div>
-            <ng-template #elseBlock>
-                <div *ngFor="let p of frase.palavras">
-                    <b>{{ p.palavra }}</b>
-                    <div *ngFor="let l of p.letras">
-                        {{ l.letra }} -> {{ l.numero }}
-                    </div>
-                    Total {{ p.soma }} -> {{ p.numero }}
-                </div>
-            </ng-template> -->
-		</div>
+						<div *ngFor="let l of p.letras" class="font-number">
+							{{ l.letra }}
+							<mat-icon class="icon-center">arrow_right</mat-icon>
+							{{ l.numero }}
+						</div>
+					</mat-expansion-panel>
+				</mat-accordion>
+			</mat-card-content>
+		</mat-card>
+		<mat-table [dataSource]="tabela" class="mat-elevation-z3 w-100 mt-20">
+			<ng-container *ngFor="let col of colunas" [matColumnDef]="col">
+				<mat-header-cell *matHeaderCellDef> {{col}} </mat-header-cell>
+				<mat-cell *matCellDef="let linha"> {{linha[col-1]}} </mat-cell>
+			</ng-container>
+			<mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+		</mat-table>
 	</mat-card>
 </div>

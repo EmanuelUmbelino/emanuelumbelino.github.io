@@ -1,9 +1,41 @@
-
-.icon-center{
+.w-100 {
+    width: 100%;
+}
+.m-auto {
+    margin: auto;
+}
+.p-page {
+    padding: 25px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.text-capitalize {
+    text-transform: capitalize;
+}
+.icon-center {
     display: inline-flex;
     vertical-align: top;
 }
-.font-number{
+.font-number {
     line-height: 27px;
     font-size: 15px;
+}
+.mat-row {
+    border-bottom: none;
+}
+.mat-cell {
+    border-right: 1px solid rgba(0,0,0,.12);
+}
+.mat-cell:first-of-type, .mat-cell:last-of-type, 
+.mat-header-cell:first-of-type,.mat-header-cell:last-of-type {
+    padding: 0;
+}
+.mat-cell:last-of-type{
+    border-right: none;
+}
+.mat-cell, .mat-header-cell {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
 }
