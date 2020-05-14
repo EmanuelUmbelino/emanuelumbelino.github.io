@@ -18,17 +18,17 @@ export class NumerologiaComponent implements OnInit {
   calcularPorPalavra(refFrase: string) {
     const palavras = refFrase.trim().split(' ');
     const frase: frase = {
-      frase: refFrase.toUpperCase(),
+      frase: refFrase.toLowerCase(),
       numero: 0,
       soma: 0,
       palavras: []
     }
     palavras.forEach(p => {
       let palavra = this.calcularPorLetras(p);
-      frase.numero += palavra.soma;
+      frase.soma += palavra.numero;
       frase.palavras.push(palavra);
     });
-    frase.soma = this.somarDigitos(frase.numero);
+    frase.numero = this.somarDigitos(frase.soma);
 
     this.frase = frase;
   }
@@ -45,14 +45,23 @@ export class NumerologiaComponent implements OnInit {
     }
 
     return {
-      palavra: refPalavra.toUpperCase(),
-      numero: total, soma: this.somarDigitos(total),
+      palavra: refPalavra.toLowerCase(),
+      numero: this.somarDigitos(total), soma: total,
       letras: valores
     }
   }
 
   somarDigitos(n) {
     return (n - 1) % 9 + 1;
+  }
+
+  esNumeroMestre(n) {
+    if (n < 11) {
+      return false;
+    }
+    let nCasas = Math.floor(Math.log10(n)) + 1;
+    let nUns = Number('1'.repeat(nCasas));
+    return Number.isInteger(n / nUns);
   }
 
   removeAcento(text) {

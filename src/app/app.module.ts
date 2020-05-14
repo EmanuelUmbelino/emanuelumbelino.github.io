@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -50,6 +51,7 @@ import { NumerologiaComponent } from './numerologia/numerologia.component';
 
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatBadgeModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
