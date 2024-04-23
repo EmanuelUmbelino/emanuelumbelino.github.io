@@ -1,0 +1,38 @@
+.logo {
+  background-image: url("/assets/logo.png");
+  background-size: contain;
+
+  animation: glow 2s infinite;
+  filter: drop-shadow(0 0 5px rgba(200, 230, 255, 0.4));
+
+  &:hover {
+    filter: drop-shadow(0 0 10px rgba(200, 230, 255, 0.6)) !important;
+  }
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(200, 230, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(200, 230, 255, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px rgba(200, 230, 255, 0.4));
+  }
+}
+
+.scroll {
+  animation: top-down 2s infinite;
+}
+@keyframes top-down {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
