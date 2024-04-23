@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalculateAge } from '../../../shared/helpers/calculate-age';
+import { CalculateAge } from '@shared/helpers/calculate-age';
 
 @Component({
   selector: 'app-about-me',
