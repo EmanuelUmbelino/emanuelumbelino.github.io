@@ -11,6 +11,8 @@ export class PortfolioComponent implements AfterViewInit {
   @ViewChild('top') top!: ElementRef;
   @ViewChild('home') home!: ElementRef;
   @ViewChild('about') about!: ElementRef;
+  @ViewChild('projects') projects!: ElementRef;
+  @ViewChild('contact') contact!: ElementRef;
 
   topics: Topic[] = [];
 
@@ -34,7 +36,8 @@ export class PortfolioComponent implements AfterViewInit {
     this.topics = [
       new Topic('home', false, this.home),
       new Topic('about', true, this.about),
-      new Topic('projects', true, this.about),
+      new Topic('projects', true, this.projects),
+      new Topic('contact', true, this.contact),
     ];
   }
 

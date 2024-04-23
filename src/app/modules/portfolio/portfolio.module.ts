@@ -5,6 +5,9 @@ import { HomeComponent } from './components/home/home.component';
 import { Routing } from './portfolio.routes';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,10 +15,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeComponent,
     AboutMeComponent,
     NavbarComponent,
+    ContactComponent,
+    ProjectsComponent,
   ],
   imports: [
     CommonModule,
-    Routing
+    Routing,
+    ReactiveFormsModule,
   ]
 })
 export class PortfolioModule { }

@@ -1,0 +1,25 @@
+<div class="container mx-auto pt-[100px] p-5 min-h-screen text-white grid grid-cols-1 gap-5 justify-center content-center">
+    <form class="flex flex-col gap-5 px-10 pt-16 pb-10" [formGroup]="form">
+        <div class="text-5xl font-bold pb-8">
+            Contact me
+        </div>
+        <div class="flex flex-col gap-2">
+            <label> Your Name </label>
+            <input [formControl]="form.controls.name" placeholder="What's your name?"/>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label> Your Email </label>
+            <input [formControl]="form.controls.email" placeholder="What's your email?"/>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label> Your Message </label>
+            <textarea [formControl]="form.controls.message" placeholder="What's your message?" rows="4"></textarea>
+        </div>
+        <div class="flex">
+            <a [class.disabled]="!form.valid" [href]="mailString">
+                Send
+                <span class="material-icons-outlined p-1">mail</span>
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,9 +1,11 @@
 <main #main (resize)="mapTopics()" (wheel)="onScroll()"
-    class="bg-gradient-to-r from-slate-900 to-slate-950 min-h-screen overflow-visible">
+    class="bg-gradient-to-r from-slate-900 to-slate-950 min-h-screen overflow-visible font-['Poppins']">
 
     <div #navbar> <app-navbar [topics]="topics"></app-navbar> </div>
 
     <div #top> </div>
     <div #home> <app-home></app-home> </div>
     <div #about> <app-about-me></app-about-me> </div>
+    <div #projects> <app-projects></app-projects> </div>
+    <div #contact> <app-contact></app-contact> </div>
 </main>

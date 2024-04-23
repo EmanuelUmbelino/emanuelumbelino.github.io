@@ -22,6 +22,7 @@
     "paths": {
       "@shared/*": ["app/shared/*"],
       "@modules/*": ["app/modules/*"],
+      "@env/*": ["environments/*"],
     },
     "lib": [
       "ES2022",
