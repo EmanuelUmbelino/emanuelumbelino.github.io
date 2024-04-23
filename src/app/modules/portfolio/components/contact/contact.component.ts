@@ -12,9 +12,9 @@ import { mail } from '@env/mail';
 export class ContactComponent {
 
   form: ContactFormGroup = new FormGroup<ContactControls>({
-    name: new FormControl('Teste', Validators.required),
-    email: new FormControl('emanuel.umbelin@gmail.com', [Validators.required, Validators.email]),
-    message: new FormControl('Uma mensagem', Validators.required),
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    message: new FormControl('', Validators.required),
   }) as ContactFormGroup;
 
   get mailString() {

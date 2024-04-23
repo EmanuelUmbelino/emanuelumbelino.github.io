@@ -38,5 +38,7 @@ a {
         background-color: gray;
         opacity: 0.7;
         filter: unset !important;
+        cursor: default;
+        pointer-events: none;
     }
 }
