@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-portfolio',
@@ -10,16 +10,20 @@ export class PortfolioComponent implements AfterViewInit {
   @ViewChild('home') home!: ElementRef;
   @ViewChild('about') about!: ElementRef;
 
-  constructor(private router: ActivatedRoute) {}
+  topics: { name: string, top: number, bottom: number }[] = [];
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngAfterViewInit() {
-    this.router.fragment.subscribe((route) => {
+    this.mapTopics();
+
+    this.route.fragment.subscribe((route) => {
       switch (route) {
         case 'about':
-          this.scroll(this.about);
+          this.scrollToTopic(this.about);
           break;
         case 'home':
-          this.scroll(this.home);
+          this.scrollToTopic(this.home);
           break;
         default:
           break;
@@ -27,8 +31,30 @@ export class PortfolioComponent implements AfterViewInit {
     });
   }
 
-  scroll(ref?: ElementRef) {
-    if (ref?.nativeElement?.scrollIntoView) {
+  mapTopics() {
+    const aux: { name: string, element: any }[]  = [
+      { name: 'home', element: this.home.nativeElement },
+      { name: 'about', element: this.about.nativeElement },
+    ];
+
+    this.topics = aux.map(topic => {
+      const name: string = topic.name;
+      const top: number = topic.element.offsetTop;
+      const bottom: number = top + topic.element.offsetHeight;
+      return { name, top, bottom };
+    });
+  }
+  
+  onScroll(ref: any) {
+    const currScroll = ref.scrollTop;
+    
+    const currTopic = this.topics.find(topic => currScroll >= topic.top && currScroll < topic.bottom);
+
+    this.router.navigate([], { relativeTo: this.route, fragment: currTopic?.name ?? '' })
+  }
+
+  scrollToTopic(ref: ElementRef) {
+    if (ref.nativeElement.scrollIntoView) {
       ref.nativeElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
