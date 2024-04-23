@@ -1,6 +1,9 @@
-<main #main (resize)="mapTopics()" (wheel)="onScroll(main)" class="bg-gradient-to-r from-slate-900 to-slate-950 h-screen overflow-auto">
-    <div class="container mx-auto">
-        <div #home> <app-home></app-home> </div>
-        <div #about> <app-about-me></app-about-me> </div>
-    </div>
+<main #main (resize)="mapTopics()" (wheel)="onScroll()"
+    class="bg-gradient-to-r from-slate-900 to-slate-950 min-h-screen overflow-visible">
+
+    <div #navbar> <app-navbar [topics]="topics"></app-navbar> </div>
+
+    <div #top> </div>
+    <div #home> <app-home></app-home> </div>
+    <div #about> <app-about-me></app-about-me> </div>
 </main>

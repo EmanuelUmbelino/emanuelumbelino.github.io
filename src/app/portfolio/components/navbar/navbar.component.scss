@@ -1,0 +1,14 @@
+.router {
+  filter: drop-shadow(0 0 0) !important;
+  transition: all 0.3s ease-in-out;
+
+  &.active {
+    filter: drop-shadow(0 0 5px rgba(200, 230, 255, 0.8)) !important;
+  }
+}
+
+.sidebar {
+  text-align: right;
+  right: 25px;
+  top: 60px;
+}

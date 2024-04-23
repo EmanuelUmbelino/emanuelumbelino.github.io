@@ -1,0 +1,33 @@
+<div class="fixed w-full font-['Poppins'] text-white z-50 bg-gradient-to-r from-slate-900 to-slate-950">
+    <div class="container mx-auto py-5 px-10 flex items-center gap-10">
+        <a routerLink="">  <img src="/assets/logo.png" width="60"/> </a>
+        <div class="flex-1"> </div>
+        @for (topic of topics; track topic) {
+            @if (topic.show) {
+                <a routerLink="/portfolio" [fragment]="topic.name" 
+                    routerLinkActive="active" 
+                    [routerLinkActiveOptions]="linkActiveOptions"
+                    class="router font-semibold text-2xl capitalize py-2 hidden sm:block">
+                    {{ topic.name }}
+                </a>
+            }
+        }
+        <div class="sm:hidden">
+            <span class="material-icons p-1" (click)="sidebar = !sidebar">{{ sidebar ? 'close' : 'menu'}}</span>
+        </div>
+    </div>
+</div>
+@if (sidebar) {
+    <div class="fixed z-50 text-white sidebar px-5 flex flex-col sm:hidden">
+        @for (topic of topics; track topic) {
+            @if (topic.show) {
+                <a routerLink="/portfolio" [fragment]="topic.name" 
+                    routerLinkActive="active" 
+                    [routerLinkActiveOptions]="linkActiveOptions"
+                    class="router font-semibold text-2xl capitalize py-2">
+                    {{ topic.name }}
+                </a>
+            }
+        }
+    </div>
+} 
