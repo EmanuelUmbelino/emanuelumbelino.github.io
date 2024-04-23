@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalculateAge } from '../../../shared/helpers/calculate-age';
 
 @Component({
   selector: 'app-about-me',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AboutMeComponent {
 
+  birthDate = new Date('08/15/1998');
+
+  currYear = new Date().getFullYear();
+
+  calculateAge = CalculateAge;
 }

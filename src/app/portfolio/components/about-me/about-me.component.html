@@ -1,7 +1,31 @@
-<div class="container mx-auto flex flex-col justify-center items-center p-5 h-screen">
-    <div>
-        <div class="bg-[url('assets/background.png')] bg-center rounded-[5vw] overflow-hidden">
-            <img class="backdrop-blur-sm" src="assets/face.png" />
+<div class="container mx-auto pt-[100px] p-5 min-h-screen text-white grid grid-cols-1 sm:grid-cols-2 gap-5 justify-center content-center">
+    <div class="sm:col-span-2">
+        <p class="text-5xl font-bold">
+           About me
+        </p>
+    </div>
+    <div class="order-last sm:order-none flex flex-col gap-5">
+        <p class="text-lg">
+            Hi, my name is Emanuel, I'm a Brazilian programmer. I'm {{ calculateAge(birthDate) }} and I'm an Angular expert!
+        </p>
+        <p class="text-lg">
+            I've been studying programming since 2014 when I started a technical Gaming Programming course. Afterwards, I graduated in Computer Science at one of the most renowned private universities in Brazil, with a full scholarship.
+        </p>
+        <p class="text-lg">
+            During my graduation, I interned at IBM, where I had my first contact with Angular. I joined there in 2018, and we used Angular 8 at that time.
+        </p>
+        <p class="text-lg">
+            Since then, I've had several jobs, all using Angular.
+        </p>
+        <p class="text-lg">
+            I already have more than 
+            <span class="font-bold text-xl ping-text px-1">{{ currYear - 2018 }} years of experience</span>
+            with Angular.
+        </p>
+    </div>
+    <div class=" justify-center flex">
+        <div class="size-40 sm:size-auto flex bg-[url('assets/background.png')] bg-center bg-cover bg-no-repeat rounded-[5vw] overflow-hidden">
+            <img class="backdrop-blur-sm w-full object-cover" src="assets/face.png" />
         </div>
     </div>
 </div>
