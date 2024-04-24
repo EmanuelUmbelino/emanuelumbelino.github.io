@@ -39,15 +39,15 @@
                     -
                     <span> {{ xp.endDate ? (xp.endDate | date: 'MMMM, y') : 'PRESENT' }} </span>
                 </div>
-                <div class="flex gap-10 items-center" [ngClass]="{ 'sm:justify-self-end': !odd }">
-                    <div class="work-card w-full sm:w-auto">
-                        <div class="position">{{ xp.position }}</div>
-                        <div class="flex justify-between">
-                            <p class="company"> {{ xp.company }} </p>
-                            <div class="flex items-center sm:hidden gap-1 text-sm">
-                                <span> {{ xp.startDate | date: 'MMMM, y' }} </span>
-                                -
-                                <span> {{ xp.endDate ? (xp.endDate | date: 'MMMM, y') : 'PRESENT' }} </span>
+                <div class="flex par overflow-hidden" [ngClass]="{ 'sm:justify-self-end': !odd }">
+                    <div class="work-card w-full sm:w-auto gap-1 sm:gap-3">
+                        <div class="position text-3xl sm:text-4xl">{{ xp.position }}</div>
+                        <div class="flex justify-between text-nowrap gap-1">
+                            <p class="company text-lg sm:text-xl"> {{ xp.company }} </p>
+                            <div class="flex items-center sm:hidden gap-1 text-xs">
+                                {{ xp.startDate | date: 'MMM, y' }} 
+                                - 
+                                {{ xp.endDate ? (xp.endDate | date: 'MMM, y') : 'PRESENT' }}
                             </div>
                         </div>
                     </div>

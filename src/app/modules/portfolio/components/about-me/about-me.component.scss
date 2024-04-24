@@ -89,10 +89,13 @@
   }
 }
 
+.par {
+  filter: drop-shadow(0 0 8px rgba(200, 230, 255, 0.6)) !important;
+}
+
 .work-card {
   background-color: rgb(241 245 249);
   color: black;
-  filter: drop-shadow(0 0 8px rgba(200, 230, 255, 0.6)) !important;
 
   display: flex;
   flex-direction: column;
@@ -100,19 +103,19 @@
 
   padding: 10px 25px;
 
+  max-width: 100%;
+  overflow: auto;
+
   .position {
     color: rgb(2 6 23);
 
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 30px;
     letter-spacing: 0.05em;
   }
   .company {
     color: rgb(71 85 105);
-
     font-weight: 600;
-    font-size: 20px;
   }
 }
 
