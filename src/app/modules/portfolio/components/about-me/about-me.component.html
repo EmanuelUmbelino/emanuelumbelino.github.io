@@ -1,8 +1,6 @@
 <div class="container mx-auto pt-[100px] p-5 min-h-screen text-white grid grid-cols-1 sm:grid-cols-2 gap-5 justify-center content-center">
-    <div class="sm:col-span-2">
-        <p class="text-5xl font-bold">
-           About me
-        </p>
+    <div class="sm:col-span-2 text-5xl font-bold">
+        About me
     </div>
     <div class="order-last sm:order-none flex flex-col gap-5">
         <p class="text-lg">
@@ -23,9 +21,31 @@
             with Angular.
         </p>
     </div>
-    <div class=" justify-center flex">
+    <div class="flex justify-center">
         <div class="size-40 sm:size-auto flex bg-[url('assets/background.png')] bg-center bg-cover bg-no-repeat rounded-[5vw] overflow-hidden">
             <img class="backdrop-blur-sm w-full object-cover" src="assets/face.png" />
         </div>
+    </div>
+</div>
+<div class="container mx-auto p-5 text-white grid grid-cols-1 gap-20">
+    <div class="text-5xl font-bold">
+        Work Experience
+    </div>
+    <div class="timeline flex flex-col gap-10">
+        @for (xp of workExperience; track xp; let odd = $odd ) {
+            <div class="grid sm:grid-cols-2 gap-10">
+                <div class="self-center period" [ngClass]="{ 'sm:text-right': odd, 'sm:order-last': !odd }">
+                    <span> {{ xp.startDate | date: 'MMMM, y' }} </span>
+                    -
+                    <span> {{ xp.endDate ? (xp.endDate | date: 'MMMM, y') : 'PRESENT' }} </span>
+                </div>
+                <div class="flex gap-10 items-center" [ngClass]="{ 'sm:justify-self-end': !odd }">
+                    <div class="work-card">
+                        <p class="position"> {{ xp.position }} </p>
+                        <p class="company"> {{ xp.company }} </p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

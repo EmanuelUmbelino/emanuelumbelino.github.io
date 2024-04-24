@@ -1,11 +1,10 @@
 .ping-text {
-    animation: glow 2s infinite;
-    filter: drop-shadow(0 0 2px rgba(200, 230, 255, 0.4));
-  
-    &:hover {
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7)) !important;
-    }
+  animation: glow 2s infinite;
+  filter: drop-shadow(0 0 2px rgba(200, 230, 255, 0.4));
 
+  &:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7)) !important;
+  }
 }
 
 @keyframes glow {
@@ -18,4 +17,71 @@
   100% {
     filter: drop-shadow(0 0 2px rgba(200, 230, 255, 0.4));
   }
+}
+
+.timeline {
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    animation: timeflow 2s infinite;
+    width: 4px;
+    height: 100%;
+    left: calc(50% - 2px);
+  }
+}
+
+@function f($frame) {
+  @return percentage(calc($frame / 100));
+}
+
+@keyframes timeflow {
+  @for $i from 0 through 100 {
+    #{f($i)} {
+      background: linear-gradient(
+        0deg,
+        rgb(30 27 75) 0%,
+        rgb(30 27 75) f(calc($i - 50)),
+        rgba(0, 212, 255, 1) f(calc($i - 25)),
+        rgb(30 27 75) f(calc($i + 0)),
+        rgb(30 27 75) f(calc($i + 50)),
+        rgba(0, 212, 255, 1) f(calc($i + 75)),
+        rgb(30 27 75) f(calc($i + 100)),
+        rgb(30 27 75) 100%
+      );
+    }
+  }
+}
+
+.work-card {
+  background-color: rgb(241 245 249);
+  color: black;
+  filter: drop-shadow(0 0 8px rgba(200, 230, 255, 0.6)) !important;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+
+  padding: 10px 25px;
+
+  .position {
+    color: rgb(2 6 23);
+
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+  }
+  .company {
+    color: rgb(71 85 105);
+
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+.period {
+  font-weight: 600;
+  font-size: 20px;
 }
