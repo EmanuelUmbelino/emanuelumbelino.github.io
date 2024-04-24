@@ -72,17 +72,17 @@
 }
 
 @keyframes timeflow {
-  @for $i from 0 through 100 {
-    #{f($i)} {
+  @for $i from 0 through 50 {
+    #{f(calc($i * 2))} {
       background: linear-gradient(
         0deg,
         rgb(30 27 75) 0%,
-        rgb(30 27 75) f(calc($i - 50)),
-        rgba(0, 212, 255, 1) f(calc($i - 25)),
-        rgb(30 27 75) f(calc($i + 0)),
-        rgb(30 27 75) f(calc($i + 50)),
-        rgba(0, 212, 255, 1) f(calc($i + 75)),
-        rgb(30 27 75) f(calc($i + 100)),
+        rgb(30 27 75) f(calc(($i * 2) - 50)),
+        rgba(0, 212, 255, 1) f(calc(($i * 2) - 25)),
+        rgb(30 27 75) f(calc(($i * 2) + 0)),
+        rgb(30 27 75) f(calc(($i * 2) + 50)),
+        rgba(0, 212, 255, 1) f(calc(($i * 2) + 75)),
+        rgb(30 27 75) f(calc(($i * 2) + 100)),
         rgb(30 27 75) 100%
       );
     }
