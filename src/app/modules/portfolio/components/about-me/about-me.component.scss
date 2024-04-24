@@ -28,7 +28,42 @@
     animation: timeflow 2s infinite;
     width: 4px;
     height: 100%;
-    left: calc(50% - 2px);
+    border-radius: 10px;
+  }
+}
+
+.work-xp {
+  position: relative;
+  margin-left: 30px;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 999px;
+    top: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    background-color: rgb(30 27 75);
+    border-width: 2px;
+    border-color: rgb(207, 207, 207);
+
+    left: -38px;
+  }
+}
+
+@media (min-width: 640px) {
+  .timeline {
+    position: relative;
+    &::before {
+      left: calc(50% - 2px);
+    }
+  }
+  .work-xp {
+    position: relative;
+    margin-left: unset;
+    &::before {
+      left: calc(50% - 10px);
+    }
   }
 }
 

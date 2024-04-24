@@ -27,22 +27,29 @@
         </div>
     </div>
 </div>
-<div class="container mx-auto p-5 text-white grid grid-cols-1 gap-20">
+<div class="container mx-auto p-5 text-white grid grid-cols-1 gap-10 sm:gap-20">
     <div class="text-5xl font-bold">
         Work Experience
     </div>
     <div class="timeline flex flex-col gap-10">
-        @for (xp of workExperience; track xp; let odd = $odd ) {
-            <div class="grid sm:grid-cols-2 gap-10">
-                <div class="self-center period" [ngClass]="{ 'sm:text-right': odd, 'sm:order-last': !odd }">
+        @for (xp of workExperience; track xp; let odd = $odd; let first = $first; let last = $last) {
+            <div class="work-xp grid sm:grid-cols-2 gap-10" [class.mt-10]="first" [class.mb-10]="last">
+                <div class="self-center period hidden sm:block" [ngClass]="{ 'sm:text-right': odd, 'sm:order-last': !odd }">
                     <span> {{ xp.startDate | date: 'MMMM, y' }} </span>
                     -
                     <span> {{ xp.endDate ? (xp.endDate | date: 'MMMM, y') : 'PRESENT' }} </span>
                 </div>
                 <div class="flex gap-10 items-center" [ngClass]="{ 'sm:justify-self-end': !odd }">
-                    <div class="work-card">
-                        <p class="position"> {{ xp.position }} </p>
-                        <p class="company"> {{ xp.company }} </p>
+                    <div class="work-card w-full sm:w-auto">
+                        <div class="position">{{ xp.position }}</div>
+                        <div class="flex justify-between">
+                            <p class="company"> {{ xp.company }} </p>
+                            <div class="flex items-center sm:hidden gap-1 text-sm">
+                                <span> {{ xp.startDate | date: 'MMMM, y' }} </span>
+                                -
+                                <span> {{ xp.endDate ? (xp.endDate | date: 'MMMM, y') : 'PRESENT' }} </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
