@@ -1,10 +1,10 @@
 {
-  "name": "portifolio",
+  "name": "emanuelumbelino.github.io",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href /emanuelumbelino.github.io/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:portifolio": "node dist/portifolio/server/server.mjs"
