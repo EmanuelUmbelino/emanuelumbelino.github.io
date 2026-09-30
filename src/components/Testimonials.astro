@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { profile, testimonials } from '@/data/profile';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const initials = (name: string) =>
+  name
+    .split(' ')
+    .filter((_, i, parts) => i === 0 || i === parts.length - 1)
+    .map((part) => part[0])
+    .join('');
+---
+
+<section id="testimonials" class="py-24 sm:py-32" aria-labelledby="testimonials-title">
+  <div class="container-page">
+    <SectionHeading
+      id="testimonials-title"
+      index="06"
+      label={t('testimonials.label')}
+      title={t('testimonials.title')}
+    />
+
+    <ul class="grid gap-5 lg:grid-cols-3">
+      {testimonials.map((item) => (
+        <li class="card flex flex-col p-7" data-reveal>
+          <figure class="flex h-full flex-col">
+            <svg
+              class="size-8 text-brand-400/60"
+              viewBox="0 0 32 32"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M9.3 25c-2.6 0-4.8-2.1-4.8-5.3 0-5 3.6-10 9-12.2l1 1.6c-3 1.6-4.8 4-5.1 6.5 2.7-.3 4.6 1.6 4.6 4.1 0 3-2 5.3-4.7 5.3Zm13.4 0c-2.6 0-4.8-2.1-4.8-5.3 0-5 3.6-10 9-12.2l1 1.6c-3 1.6-4.8 4-5.1 6.5 2.7-.3 4.6 1.6 4.6 4.1 0 3-2 5.3-4.7 5.3Z" />
+            </svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-pretty text-fg/90">
+              <p>{item.quote[lang]}</p>
+            </blockquote>
+            {item.translatedFrom && item.translatedFrom !== lang && (
+              <p class="mt-3 font-mono text-[11px] text-muted">{t('testimonials.translated')}</p>
+            )}
+            <figcaption class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+              <span
+                class="grid size-10 shrink-0 place-items-center rounded-full bg-brand-800 text-sm font-semibold text-white"
+                aria-hidden="true"
+              >
+                {initials(item.name)}
+              </span>
+              <div class="min-w-0">
+                <a
+                  href={item.linkedin}
+                  target="_blank"
+                  rel="noopener"
+                  class="font-semibold transition-colors hover:text-link"
+                >
+                  {item.name}
+                </a>
+                <p class="text-sm text-muted">{item.role[lang]}</p>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 text-center" data-reveal>
+      <a
+        href={profile.social.linkedin}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 font-mono text-sm text-link hover:underline"
+      >
+        <Icon name="linkedin" size={14} />
+        {t('testimonials.more')}
+      </a>
+    </p>
+  </div>
+</section>

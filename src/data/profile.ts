@@ -1,4 +1,4 @@
-import type { Localized } from '@/i18n/ui';
+import type { Lang, Localized } from '@/i18n/ui';
 
 /**
  * All portfolio content lives here. Edit this file to update the site —
@@ -348,6 +348,51 @@ export const projects: {
     highlights: { pt: [], en: [] },
     tags: ['Astro', 'Tailwind CSS', 'TypeScript', 'Playwright', 'GitHub Actions'],
     code: 'https://github.com/EmanuelUmbelino/emanuelumbelino.github.io',
+  },
+];
+
+/**
+ * LinkedIn recommendations (excerpts). `translatedFrom` marks quotes that were
+ * written in another language, so the page can say it's a translation.
+ */
+export const testimonials: {
+  name: string;
+  role: Localized;
+  linkedin: string;
+  quote: Localized;
+  translatedFrom?: Lang;
+}[] = [
+  {
+    name: 'Maria Clara Coimbra',
+    role: { pt: 'Product Owner na Vonex.AI', en: 'Product Owner at Vonex.AI' },
+    linkedin: 'https://www.linkedin.com/in/maria-clara-coimbra-a416401a4/',
+    quote: {
+      pt: 'Se eu tivesse que resumir o Emanuel em uma palavra, seria confiança. Sempre soube que, quando uma entrega estava com ele, estaria bem feita, no detalhe e dentro do combinado. O Emanuel tem um olhar muito atento para a experiência de quem usa o sistema.',
+      en: 'If I had to sum Emanuel up in one word, it would be trust. I always knew that when a delivery was in his hands, it would be done well, down to the details and as agreed. Emanuel has a very keen eye for the experience of the people using the system.',
+    },
+    translatedFrom: 'pt',
+  },
+  {
+    name: 'Paulo Lebtag',
+    role: {
+      pt: 'AI Design Engineer & Product Manager',
+      en: 'AI Design Engineer & Product Manager',
+    },
+    linkedin: 'https://www.linkedin.com/in/paulolebtag/',
+    quote: {
+      pt: 'O Emanuel combina um alto nível de perfeccionismo técnico com uma visão de produto refinada. Ele não se limita a entregar o código; ele entende o contexto do negócio e questiona decisões para entregar a melhor experiência. É o tipo de profissional que eleva a qualidade de qualquer time ou projeto.',
+      en: "Emanuel combines a high level of technical perfectionism with a refined product mindset. He doesn't just deliver code; he truly understands the business context and challenges decisions to deliver the best possible user experience. He is the kind of professional who elevates the quality of any team or project.",
+    },
+  },
+  {
+    name: 'Marcus Vinicius Coube',
+    role: { pt: 'Senior Frontend Engineer', en: 'Senior Frontend Engineer' },
+    linkedin: 'https://www.linkedin.com/in/marcus-coube/',
+    quote: {
+      pt: 'Além da competência técnica, ele teve um papel importante no apoio à liderança do time, orientando desenvolvedores plenos e juniores com paciência e generosidade. Também se destaca pela organização e pela facilidade com metodologias ágeis, ajudando o time a manter um bom ritmo de entregas.',
+      en: "Beyond his technical skills, he played an important role supporting the team's leadership, mentoring mid-level and junior developers with patience and generosity. He also stands out for his organization and ease with agile methodologies, helping the team keep a steady delivery pace.",
+    },
+    translatedFrom: 'pt',
   },
 ];
 
