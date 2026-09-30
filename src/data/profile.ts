@@ -66,12 +66,18 @@ export const about = {
   } as Localized<string[]>,
   stats: [
     { value: '10+', label: { pt: 'anos de experiência', en: 'years of experience' } },
+    { value: '9', label: { pt: 'clientes atendidos', en: 'clients served' } },
     {
-      value: '15',
-      label: { pt: 'anos quando comecei a programar', en: 'years old when I started coding' },
+      value: '4',
+      label: {
+        pt: 'gigantes de óleo e gás usam minhas plataformas',
+        en: 'oil & gas majors use my platforms',
+      },
     },
-    { value: '2019', label: { pt: 'trabalhando 100% remoto', en: 'working fully remote since' } },
-    { value: '6+', label: { pt: 'grandes empresas atendidas', en: 'global companies served' } },
+    {
+      value: '24/7',
+      label: { pt: 'atendimento automatizado com IA', en: 'AI-automated customer service' },
+    },
   ] satisfies { value: string; label: Localized }[],
   facts: [
     {
@@ -327,18 +333,6 @@ export const projects: {
     },
     highlights: { pt: [], en: [] },
     tags: ['Mobile', 'GPS', 'Route Optimization', 'Health'],
-  },
-  {
-    name: 'Portfolio',
-    type: { pt: 'Este site', en: 'This website' },
-    period: { pt: 'Set 2026', en: 'Sep 2026' },
-    description: {
-      pt: 'Site estático bilíngue, rápido e acessível, com CI/CD no GitHub Actions: lint, type-check, testes E2E com Playwright e deploy automático no GitHub Pages.',
-      en: 'Fast, accessible, bilingual static site with CI/CD on GitHub Actions: lint, type-check, Playwright E2E tests and automatic deploy to GitHub Pages.',
-    },
-    highlights: { pt: [], en: [] },
-    tags: ['Astro', 'Tailwind CSS', 'TypeScript', 'Playwright', 'GitHub Actions'],
-    code: 'https://github.com/EmanuelUmbelino/emanuelumbelino.github.io',
   },
 ];
 
