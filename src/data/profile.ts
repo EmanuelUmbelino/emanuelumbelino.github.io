@@ -27,8 +27,8 @@ export const profile = {
     en: ['Software Engineer', 'Full-Stack Developer', 'AI Specialist', 'Front-End & UX'],
   } as Localized<string[]>,
   intro: {
-    pt: 'Construo plataformas web para a indústria de petróleo, usadas por Petrobras e Shell, e agentes de IA que atendem clientes de marcas como Samsung e Carrefour — com foco em interfaces claras e em entender o problema certo antes de escrever código.',
-    en: 'I build web platforms for the oil & gas industry, used by Petrobras and Shell, and AI agents that serve customers of brands like Samsung and Carrefour — focused on clean interfaces and on understanding the right problem before writing code.',
+    pt: 'Engenheiro de software full-stack com mais de 10 anos de experiência, base forte em front-end e UX, e foco em IA aplicada — de agentes de atendimento a desenvolvimento guiado por especificação. Transformo problemas de negócio em produtos claros, rápidos e fáceis de usar.',
+    en: 'Full-stack software engineer with 10+ years of experience, a strong front-end and UX foundation, and a focus on applied AI — from customer service agents to spec-driven development. I turn business problems into clear, fast and easy-to-use products.',
   } as Localized,
   cv: {
     pt: '/cv/Emanuel_Umbelino_PT.pdf',
@@ -40,6 +40,9 @@ export const profile = {
   },
   repo: 'https://github.com/EmanuelUmbelino/emanuelumbelino.github.io',
 };
+
+/** Companies I worked at, delivering the client projects below. */
+export const employers = ['PUC-Rio', 'Vonex.AI'];
 
 export const clients = [
   'Petrobras',
@@ -56,11 +59,11 @@ export const clients = [
 export const about = {
   paragraphs: {
     pt: [
-      'Sou engenheiro de software com mais de 10 anos de experiência — programo desde os 15. Sou full-stack, com uma base forte em front-end, UX e desenvolvimento de interfaces, e hoje me especializo em agentes de IA, automações com LLMs e Spec-Driven Development (SDD) assistido por IA.',
+      'Programo desde os 15 anos e construo software profissionalmente há mais de 10. Sou full-stack, com uma base forte em front-end, UX e desenvolvimento de interfaces, e hoje me especializo em agentes de IA, automações com LLMs e Spec-Driven Development (SDD) assistido por IA.',
       'Já entreguei sistemas em produção para Petrobras, Shell, Petronas, CNOOC, Samsung e Carrefour. Trabalho 100% remoto desde 2019, com clientes internacionais e em diferentes fusos. Tenho visão de produto: busco entender a necessidade de quem vai usar o sistema para entregar a solução certa — não só a tarefa do backlog.',
     ],
     en: [
-      "I'm a software engineer with 10+ years of experience — I've been programming since I was 15. I'm full-stack with a strong front-end, UX and interface background, and today I specialize in AI agents, LLM-powered automation and AI-assisted Spec-Driven Development (SDD).",
+      "I've been programming since I was 15 and building software professionally for over 10 years. I'm full-stack with a strong front-end, UX and interface background, and today I specialize in AI agents, LLM-powered automation and AI-assisted Spec-Driven Development (SDD).",
       "I've delivered production systems for Petrobras, Shell, Petronas, CNOOC, Samsung and Carrefour. I've been fully remote since 2019, working across time zones with international clients. I'm product-minded: I focus on understanding what users actually need so I can deliver the right solution — not just the backlog ticket.",
     ],
   } as Localized<string[]>,
@@ -334,6 +337,18 @@ export const projects: {
     highlights: { pt: [], en: [] },
     tags: ['Mobile', 'GPS', 'Route Optimization', 'Health'],
   },
+  {
+    name: 'Portfolio',
+    type: { pt: 'Este site', en: 'This website' },
+    period: { pt: 'Set 2026', en: 'Sep 2026' },
+    description: {
+      pt: 'Site estático bilíngue, rápido e acessível, com CI/CD no GitHub Actions: lint, type-check, testes E2E com Playwright e deploy automático no GitHub Pages.',
+      en: 'Fast, accessible, bilingual static site with CI/CD on GitHub Actions: lint, type-check, Playwright E2E tests and automatic deploy to GitHub Pages.',
+    },
+    highlights: { pt: [], en: [] },
+    tags: ['Astro', 'Tailwind CSS', 'TypeScript', 'Playwright', 'GitHub Actions'],
+    code: 'https://github.com/EmanuelUmbelino/emanuelumbelino.github.io',
+  },
 ];
 
 export const education: { school: string; degree: Localized; period: Localized }[] = [
@@ -355,11 +370,7 @@ export const education: { school: string; degree: Localized; period: Localized }
   },
 ];
 
-export const spokenLanguages: { name: Localized; level: Localized; percent: number }[] = [
-  {
-    name: { pt: 'Português', en: 'Portuguese' },
-    level: { pt: 'Nativo', en: 'Native' },
-    percent: 100,
-  },
-  { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Avançado', en: 'Advanced' }, percent: 80 },
+export const spokenLanguages: { name: Localized; level: Localized }[] = [
+  { name: { pt: 'Português', en: 'Portuguese' }, level: { pt: 'Nativo', en: 'Native' } },
+  { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Avançado', en: 'Advanced' } },
 ];

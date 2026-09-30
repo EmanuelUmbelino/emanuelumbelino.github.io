@@ -1,5 +1,5 @@
 ---
-import { clients } from '@/data/profile';
+import { clients, employers } from '@/data/profile';
 import type { Lang } from '@/i18n/ui';
 import { useTranslations } from '@/i18n/utils';
 
@@ -11,19 +11,33 @@ const t = useTranslations(Astro.props.lang);
 ---
 
 <section class="border-y border-line bg-surface/40 py-10" aria-labelledby="clients-title">
-  <div class="container-page" data-reveal>
-    <h2
-      id="clients-title"
-      class="text-center font-mono text-xs tracking-[0.2em] text-muted uppercase"
-    >
-      {t('clients.title')}
-    </h2>
-    <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-      {clients.map((c) => (
-        <li class="text-lg font-bold tracking-tight text-muted transition-colors hover:text-fg sm:text-xl">
-          {c}
-        </li>
-      ))}
-    </ul>
+  <h2 id="clients-title" class="sr-only">
+    {t('clients.heading')}
+  </h2>
+  <div
+    class="container-page flex flex-col items-center gap-8 lg:flex-row lg:items-stretch lg:gap-0"
+    data-reveal
+  >
+    <div class="flex shrink-0 flex-col items-center lg:items-start lg:border-r lg:border-line lg:pr-10">
+      <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase">
+        {t('clients.employers')}
+      </p>
+      <ul class="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        {employers.map((e) => (
+          <li class="text-lg font-bold tracking-tight text-fg sm:text-xl">{e}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex min-w-0 flex-1 flex-col items-center lg:items-start lg:pl-10">
+      <p class="font-mono text-xs tracking-[0.2em] text-muted uppercase">{t('clients.title')}</p>
+      <ul class="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 lg:justify-start lg:gap-x-5">
+        {clients.map((c) => (
+          <li class="text-lg font-bold tracking-tight text-muted transition-colors hover:text-fg sm:text-xl lg:text-lg">
+            {c}
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
