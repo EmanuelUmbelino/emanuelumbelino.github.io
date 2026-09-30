@@ -1,27 +1,64 @@
-# Portifolio
+# emanuelumbelino.github.io
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+[![Deploy](https://github.com/EmanuelUmbelino/emanuelumbelino.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/EmanuelUmbelino/emanuelumbelino.github.io/actions/workflows/deploy.yml)
 
-## Development server
+Portfólio pessoal de **Emanuel Umbelino**, engenheiro de software full-stack especializado em IA e automação.
+🔗 **https://emanuelumbelino.github.io** · 🇺🇸 [/en/](https://emanuelumbelino.github.io/en/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Stack
 
-## Code scaffolding
+- [Astro](https://astro.build): site estático, zero JS por padrão
+- [Tailwind CSS v4](https://tailwindcss.com): design tokens com paleta baseada em `#002882`, tema claro/escuro
+- TypeScript (strictest)
+- i18n: PT-BR (`/`) e EN (`/en/`)
+- Playwright + axe-core: testes E2E e de acessibilidade (WCAG 2 AA)
+- Lighthouse CI: orçamento de performance, a11y, boas práticas e SEO
+- GitHub Actions: CI em PRs e deploy automático no GitHub Pages
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Desenvolvimento
 
-## Build
+Requer Node.js 22.12+ (veja `.nvmrc`).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install
+npm run dev          # http://localhost:4321
+npm run build        # gera ./dist
+npm run preview      # serve ./dist
+npm run ci           # format:check + lint + type-check + build
+npm run test:e2e     # Playwright (rode depois do build)
+```
 
-## Running unit tests
+## Editando o conteúdo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Todo o conteúdo fica em [`src/data/profile.ts`](src/data/profile.ts): experiências, projetos, skills, formação e links. Os textos de interface ficam em [`src/i18n/ui.ts`](src/i18n/ui.ts). Os componentes cuidam só do layout.
 
-## Running end-to-end tests
+- **Foto:** `src/assets/face.jpg` (quadrada, em alta resolução; o Astro gera versões otimizadas no build)
+- **Currículos:** `public/cv/Emanuel_Umbelino_PT.pdf` e `public/cv/Emanuel_Umbelino_EN.pdf`
+- **Badge "Aberto a oportunidades":** `profile.openToWork`
+- **Imagens de compartilhamento:** `public/og-pt.png`, `public/og-en.png` (1200×630)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Estrutura
 
-## Further help
+```
+src/
+├── assets/        imagens otimizadas pelo Astro
+├── components/    seções da página (Hero, About, Experience…)
+├── data/          conteúdo tipado e bilíngue
+├── i18n/          traduções e helpers
+├── layouts/       <head>, SEO, JSON-LD, tema
+├── pages/         / (pt), /en/, 404
+├── scripts/       interações client-side (tema, menu, typing, reveal)
+└── styles/        Tailwind + tokens de cor
+tests/             Playwright + axe
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## CI/CD
+
+| Workflow     | Quando                          | O que faz                                                                                |
+| ------------ | ------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ci.yml`     | PRs e pushes (exceto `develop`) | Prettier, ESLint, `astro check`, build, Playwright (desktop + mobile, a11y) e Lighthouse |
+| `deploy.yml` | push na `develop`               | Roda o CI e publica o `dist` no GitHub Pages                                             |
+
+> **Configuração única:** em _Settings → Pages → Build and deployment → Source_, selecione **GitHub Actions**.
+
+Dependabot mantém as dependências npm e as GitHub Actions atualizadas.

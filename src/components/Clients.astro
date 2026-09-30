@@ -1,0 +1,29 @@
+---
+import { clients } from '@/data/profile';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section class="border-y border-line bg-surface/40 py-10" aria-labelledby="clients-title">
+  <div class="container-page" data-reveal>
+    <h2
+      id="clients-title"
+      class="text-center font-mono text-xs tracking-[0.2em] text-muted uppercase"
+    >
+      {t('clients.title')}
+    </h2>
+    <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {clients.map((c) => (
+        <li class="text-lg font-bold tracking-tight text-muted transition-colors hover:text-fg sm:text-xl">
+          {c}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

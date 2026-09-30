@@ -1,0 +1,107 @@
+---
+import '@/styles/global.css';
+import { htmlLang, languages, ogLocale, type Lang } from '@/i18n/ui';
+import { homePath, useTranslations } from '@/i18n/utils';
+import { profile } from '@/data/profile';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Emit hreflang alternates (only for pages that exist in every language). */
+  alternates?: boolean;
+  noindex?: boolean;
+}
+
+const { lang, title, description, alternates = true, noindex = false } = Astro.props;
+const t = useTranslations(lang);
+
+const pageTitle = title ?? t('meta.title');
+const pageDescription = description ?? t('meta.description');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(`/og-${lang}.png`, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.headline[lang],
+  description: pageDescription,
+  url: new URL(homePath(lang), Astro.site).href,
+  image: new URL('/og-avatar.png', Astro.site).href,
+  email: `mailto:${profile.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Pontifícia Universidade Católica do Rio de Janeiro',
+  },
+  knowsAbout: [
+    'Software Engineering',
+    'Full-Stack Development',
+    'AI Agents',
+    'LLM',
+    'UX',
+    'TypeScript',
+  ],
+  sameAs: [profile.social.github, profile.social.linkedin],
+};
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]} class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={profile.name} />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    {alternates &&
+      (Object.keys(languages) as Lang[]).map((l) => (
+        <link rel="alternate" hreflang={htmlLang[l]} href={new URL(homePath(l), Astro.site)} />
+      ))}
+    {alternates && <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#020a1f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f9ff" media="(prefers-color-scheme: light)" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    <meta property="profile:first_name" content={profile.firstName} />
+    <meta property="profile:last_name" content={profile.lastName} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <!-- Apply theme before paint to avoid a flash. Dark is the default. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('js');
+        let theme = 'dark';
+        try {
+          theme = localStorage.getItem('theme') ?? 'dark';
+        } catch {}
+        root.classList.toggle('dark', theme === 'dark');
+      })();
+    </script>
+  </head>
+  <body class="min-h-dvh overflow-x-hidden">
+    <slot />
+  </body>
+</html>
