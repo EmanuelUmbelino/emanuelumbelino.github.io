@@ -111,10 +111,8 @@ function initActiveNav() {
     },
     { rootMargin: '-45% 0px -50% 0px' },
   );
-  byId.forEach((_, id) => {
-    const section = id && document.getElementById(id);
-    if (section) io.observe(section);
-  });
+  // Watch every section so the highlight clears on ones without a nav link (hero, education…)
+  document.querySelectorAll('main > section').forEach((section) => io.observe(section));
 }
 
 function initCopy() {
