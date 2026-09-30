@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { education, spokenLanguages } from '@/data/profile';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="education" class="bg-surface/30 py-24 sm:py-32" aria-labelledby="education-title">
+  <div class="container-page">
+    <SectionHeading
+      id="education-title"
+      index="06"
+      label={t('education.label')}
+      title={t('education.title')}
+    />
+
+    <div class="grid gap-5 lg:grid-cols-3">
+      {education.map((e) => (
+        <article class="card flex gap-4 p-6" data-reveal>
+          <div class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-800 text-white">
+            <Icon name="graduation" size={22} />
+          </div>
+          <div>
+            <h3 class="text-lg font-bold tracking-tight">{e.school}</h3>
+            <p class="mt-1 text-muted">{e.degree[lang]}</p>
+            <p class="mt-3 font-mono text-xs text-accent">{e.period[lang]}</p>
+          </div>
+        </article>
+      ))}
+
+      <article class="card p-6" data-reveal>
+        <h3 class="flex items-center gap-2 text-lg font-bold tracking-tight">
+          <Icon name="globe" size={20} class="text-accent" />
+          {t('education.languages')}
+        </h3>
+        <ul class="mt-5 space-y-4">
+          {spokenLanguages.map((l) => (
+            <li>
+              <div class="flex justify-between text-sm">
+                <span class="font-medium">{l.name[lang]}</span>
+                <span class="font-mono text-xs text-muted">{l.level[lang]}</span>
+              </div>
+              <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-2" aria-hidden="true">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-brand-500 to-accent"
+                  style={`width: ${l.percent}%`}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>

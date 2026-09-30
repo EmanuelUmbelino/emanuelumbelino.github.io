@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import face from '@/assets/face.webp';
+import { profile } from '@/data/profile';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const roles = profile.roles[lang];
+---
+
+<section
+  class="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 lg:pb-28"
+  aria-labelledby="hero-title"
+>
+  <!-- Background: grid + brand glow -->
+  <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div
+    class="absolute top-[-20%] left-1/2 -z-10 size-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,var(--glow),transparent_60%)] blur-2xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container-page grid items-center gap-14 lg:grid-cols-[1.25fr_1fr]">
+    <div class="order-2 lg:order-1">
+      <div class="mb-6 flex flex-wrap gap-2">
+        {profile.openToWork && (
+          <span class="chip gap-2 border-accent/30 text-fg">
+            <span class="size-2 animate-pulse-ring rounded-full bg-accent" aria-hidden="true" />
+            {t('hero.available')}
+          </span>
+        )}
+        <span class="chip gap-1.5">
+          <Icon name="globe" size={12} />
+          {t('hero.remote')}
+        </span>
+      </div>
+
+      <p class="font-mono text-sm text-muted">{t('hero.greeting')}</p>
+      <h1
+        id="hero-title"
+        class="mt-2 text-5xl leading-[1.05] font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
+      >
+        Emanuel <span class="text-gradient">Umbelino</span>
+      </h1>
+
+      <p class="mt-5 h-8 font-mono text-lg text-fg sm:text-xl" aria-live="off">
+        <span class="mr-2 text-accent">&gt;</span>
+        <span data-typing data-words={JSON.stringify(roles)}>
+          {roles[0]}
+        </span>
+        <span
+          class="ml-0.5 inline-block h-5 w-2 translate-y-0.5 animate-blink bg-accent"
+          aria-hidden="true"
+        ></span>
+      </p>
+
+      <p class="mt-6 max-w-xl text-lg text-pretty text-muted">{profile.intro[lang]}</p>
+
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#contact" class="btn-primary">
+          {t('hero.cta.contact')}
+          <Icon name="arrow-right" size={16} />
+        </a>
+        <a href={profile.cv[lang]} class="btn-ghost" download>
+          <Icon name="download" size={16} />
+          {t('hero.cta.cv')}
+        </a>
+        <div class="flex gap-2">
+          <a
+            href={profile.social.linkedin}
+            class="btn-ghost px-3.5"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <Icon name="linkedin" size={18} />
+          </a>
+          <a
+            href={profile.social.github}
+            class="btn-ghost px-3.5"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+          >
+            <Icon name="github" size={18} />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-1 mx-auto w-full max-w-[14rem] sm:max-w-xs lg:order-2 lg:max-w-sm">
+      <div class="relative aspect-square">
+        <!-- Orbit rings -->
+        <div
+          class="absolute -inset-6 rounded-full border border-dashed border-line"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="absolute -inset-12 hidden rounded-full border border-line/60 sm:block"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="absolute inset-0 rounded-full bg-gradient-to-br from-brand-500 via-brand-800 to-brand-950 shadow-2xl shadow-brand-600/30"
+          aria-hidden="true"
+        ></div>
+        <div class="absolute inset-0 overflow-hidden rounded-full">
+          <Image
+            src={face}
+            alt={t('hero.photo')}
+            widths={[224, 320, 384, 547]}
+            sizes="(min-width: 1024px) 384px, (min-width: 640px) 320px, 224px"
+            loading="eager"
+            fetchpriority="high"
+            class="size-full scale-110 object-cover object-top pt-4"
+          />
+        </div>
+        <!-- Floating badges -->
+        <div class="card absolute top-6 -left-4 flex items-center gap-2 px-3 py-2 font-mono text-xs shadow-lg sm:-left-10">
+          <Icon name="bot" size={14} class="text-accent" />
+          AI Agents
+        </div>
+        <div class="card absolute -right-2 bottom-8 flex items-center gap-2 px-3 py-2 font-mono text-xs shadow-lg sm:-right-8">
+          <span class="text-accent">10+</span>
+          {t('hero.badge.years')}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="#about"
+    class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted uppercase transition-colors hover:text-fg lg:flex"
+    aria-label={t('hero.scroll')}
+  >
+    scroll
+    <Icon name="arrow-down" size={14} class="animate-bounce" />
+  </a>
+</section>

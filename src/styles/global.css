@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Brand scale derived from #002882 */
+@theme {
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #dbe5ff;
+  --color-brand-200: #bccfff;
+  --color-brand-300: #8eacff;
+  --color-brand-400: #5a80ff;
+  --color-brand-500: #3358f5;
+  --color-brand-600: #1a3ed6;
+  --color-brand-700: #0f2fae;
+  --color-brand-800: #002882;
+  --color-brand-900: #001d5e;
+  --color-brand-950: #00113a;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+}
+
+/* Semantic tokens — light */
+:root {
+  --bg: #f7f9ff;
+  --surface: #ffffff;
+  --surface-2: #eef3ff;
+  --border: #dbe5ff;
+  --fg: #00113a;
+  --muted: #475380;
+  --primary: #002882;
+  --primary-hover: #0f2fae;
+  --primary-fg: #ffffff;
+  --link: #0f2fae;
+  --accent: #0e7490;
+  --glow: color-mix(in oklab, #3358f5 18%, transparent);
+  --grid: color-mix(in oklab, #002882 7%, transparent);
+  color-scheme: light;
+}
+
+/* Semantic tokens — dark */
+.dark {
+  --bg: #020a1f;
+  --surface: #06122e;
+  --surface-2: #0a1a3f;
+  --border: color-mix(in oklab, #8eacff 14%, transparent);
+  --fg: #e6ecff;
+  --muted: #9aa8cc;
+  --primary: #1a3ed6;
+  --primary-hover: #3358f5;
+  --primary-fg: #ffffff;
+  --link: #8eacff;
+  --accent: #22d3ee;
+  --glow: color-mix(in oklab, #3358f5 35%, transparent);
+  --grid: color-mix(in oklab, #8eacff 6%, transparent);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg: var(--primary-fg);
+  --color-link: var(--link);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-surface/70 backdrop-blur-sm;
+}
+@utility chip {
+  @apply inline-flex items-center rounded-full border border-line bg-surface-2/60 px-3 py-1 font-mono text-xs text-muted;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200;
+}
+@utility btn-primary {
+  @apply btn bg-primary text-primary-fg shadow-lg shadow-brand-600/20 hover:-translate-y-0.5 hover:bg-primary-hover;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-surface/60 text-fg hover:-translate-y-0.5 hover:border-brand-400/50;
+}
+
+@layer components {
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-accent bg-clip-text text-transparent;
+  }
+  .dark .text-gradient {
+    @apply from-brand-300 via-brand-400 to-accent;
+  }
+}
+
+/* Scroll reveal — only hides content when JS is available */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

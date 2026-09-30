@@ -1,0 +1,49 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { about } from '@/data/profile';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="about" class="py-24 sm:py-32" aria-labelledby="about-title">
+  <div class="container-page">
+    <SectionHeading id="about-title" index="01" label={t('about.label')} title={t('about.title')} />
+
+    <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div class="space-y-5 text-lg leading-relaxed text-pretty text-muted" data-reveal>
+        {about.paragraphs[lang].map((p) => (
+          <p>{p}</p>
+        ))}
+
+        <dl class="grid gap-3 pt-4 sm:grid-cols-2">
+          {about.facts.map((f) => (
+            <div class="card px-4 py-3">
+              <dt class="font-mono text-[11px] tracking-[0.15em] text-accent uppercase">
+                {f.label[lang]}
+              </dt>
+              <dd class="mt-1 text-sm font-medium text-fg">{f.value[lang]}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <dl class="grid grid-cols-2 gap-4 self-start" data-reveal>
+        {about.stats.map((s) => (
+          <div class="card group relative flex flex-col overflow-hidden p-6 transition-colors before:absolute before:-top-10 before:-right-10 before:size-28 before:rounded-full before:bg-[radial-gradient(circle,var(--glow),transparent_70%)] before:opacity-60 before:transition-opacity hover:border-brand-400/40 hover:before:opacity-100">
+            <dt class="mt-2 text-sm text-muted">{s.label[lang]}</dt>
+            <dd class="order-first text-4xl font-extrabold tracking-tight text-gradient">
+              {s.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
