@@ -40,9 +40,9 @@ export const ui = {
     'about.label': 'Sobre',
     'about.title': 'Produto, interface e código — de ponta a ponta.',
     'ai.label': 'IA & Automação',
-    'ai.title': 'Agentes de IA que resolvem problemas reais.',
+    'ai.title': 'IA aplicada — no produto e no processo.',
     'ai.subtitle':
-      'Da integração com LLMs em plataformas críticas a fluxos de atendimento 24/7 — IA aplicada com foco em resultado.',
+      'De agentes que atendem milhares de clientes por dia a um desenvolvimento mais rápido guiado por especificação — IA com foco em resultado.',
     'stack.label': 'Stack',
     'stack.title': 'Ferramentas que uso no dia a dia.',
     'experience.label': 'Carreira',
@@ -97,9 +97,9 @@ export const ui = {
     'about.label': 'About',
     'about.title': 'Product, interface and code — end to end.',
     'ai.label': 'AI & Automation',
-    'ai.title': 'AI agents that solve real problems.',
+    'ai.title': 'Applied AI — in the product and in the process.',
     'ai.subtitle':
-      'From LLM integration in mission-critical platforms to 24/7 customer service flows — applied AI focused on outcomes.',
+      'From agents that serve thousands of customers a day to faster, spec-driven development — AI focused on outcomes.',
     'stack.label': 'Stack',
     'stack.title': 'Tools I use every day.',
     'experience.label': 'Career',

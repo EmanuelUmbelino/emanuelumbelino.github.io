@@ -27,8 +27,8 @@ export const profile = {
     en: ['Software Engineer', 'Full-Stack Developer', 'AI Specialist', 'Front-End & UX'],
   } as Localized<string[]>,
   intro: {
-    pt: 'Construo plataformas web e agentes de IA para empresas como Petrobras, Shell, Samsung e Carrefour — com foco em interfaces claras e em entender o problema certo antes de escrever código.',
-    en: 'I build web platforms and AI agents for companies like Petrobras, Shell, Samsung and Carrefour — focused on clean interfaces and on understanding the right problem before writing code.',
+    pt: 'Construo plataformas web para a indústria de petróleo, usadas por Petrobras e Shell, e agentes de IA que atendem clientes de marcas como Samsung e Carrefour — com foco em interfaces claras e em entender o problema certo antes de escrever código.',
+    en: 'I build web platforms for the oil & gas industry, used by Petrobras and Shell, and AI agents that serve customers of brands like Samsung and Carrefour — focused on clean interfaces and on understanding the right problem before writing code.',
   } as Localized,
   cv: {
     pt: '/cv/Emanuel_Umbelino_PT.pdf',
@@ -100,35 +100,38 @@ export const aiHighlights: { icon: AiIcon; title: Localized; text: Localized; ta
     icon: 'bot',
     title: { pt: 'Agentes de atendimento 24/7', en: '24/7 customer service agents' },
     text: {
-      pt: 'Plataforma omnichannel com agentes de IA para Samsung, Carrefour e outras marcas, com milhares de mensagens por dia e atendimento personalizado a cada cliente.',
-      en: 'Omnichannel platform with AI agents for Samsung, Carrefour and other brands, handling thousands of messages daily with personalized service for each customer.',
+      pt: 'Fluxos de atendimento automatizados com agentes de IA em uma plataforma omnichannel usada por Samsung, Carrefour e outras marcas — milhares de mensagens por dia, com atendimento completo e personalizado a cada cliente.',
+      en: 'Automated support flows powered by AI agents on an omnichannel platform used by Samsung, Carrefour and other brands — thousands of messages a day, with complete and personalized service for each customer.',
     },
-    tags: ['LLM Agents', 'Omnichannel', 'Automation'],
+    tags: ['AI Agents', 'Omnichannel', 'Automation'],
   },
   {
     icon: 'plug',
-    title: { pt: 'Claude API em produção', en: 'Claude API in production' },
+    title: { pt: 'Integração com Gemini e OpenAI', en: 'Gemini & OpenAI integration' },
     text: {
-      pt: 'Integração da Claude API em plataformas de análise de dados de poços de petróleo usadas por Petrobras, Shell, Petronas e CNOOC.',
-      en: 'Claude API integrated into well-data analysis platforms used by Petrobras, Shell, Petronas and CNOOC.',
+      pt: 'Integração das APIs de IA do Google Gemini e da OpenAI (ChatGPT) para automatizar o atendimento ao cliente, com respostas contextualizadas para cada marca e cada conversa.',
+      en: 'Integrated Google Gemini and OpenAI (ChatGPT) APIs to automate customer service, with responses tailored to each brand and each conversation.',
     },
-    tags: ['Claude API', 'Oil & Gas', 'Data'],
+    tags: ['Gemini API', 'OpenAI API', 'LLM'],
   },
   {
     icon: 'layers',
     title: { pt: 'RAG & orquestração de prompts', en: 'RAG & prompt orchestration' },
     text: {
-      pt: 'Sistemas RAG e orquestração de prompts para respostas confiáveis, conectadas aos dados e ao contexto de cada negócio.',
-      en: 'RAG systems and prompt orchestration for reliable answers grounded in each business’s data and context.',
+      pt: 'Orquestração de prompts e sistemas RAG para que os agentes respondam com base nos dados e no contexto de cada negócio — respostas mais precisas e confiáveis.',
+      en: 'Prompt orchestration and RAG systems so agents answer grounded in each business’s data and context — more accurate, reliable responses.',
     },
     tags: ['RAG', 'Prompt Orchestration'],
   },
   {
     icon: 'spec',
-    title: { pt: 'Spec-Driven Development', en: 'Spec-Driven Development' },
+    title: {
+      pt: 'Spec-Driven Development com Claude',
+      en: 'Spec-Driven Development with Claude',
+    },
     text: {
-      pt: 'Desenvolvimento guiado por especificação e assistido por IA com Claude Code e Cursor: mais velocidade sem abrir mão de qualidade e testes.',
-      en: 'AI-assisted, spec-driven development with Claude Code and Cursor: more speed without giving up quality and tests.',
+      pt: 'Desenvolvimento guiado por especificação e assistido por IA com Claude Code — aplicado nas plataformas para a indústria de petróleo, com mais velocidade sem abrir mão de qualidade e testes.',
+      en: 'AI-assisted, spec-driven development with Claude Code — applied to the oil & gas platforms, delivering faster without giving up quality and tests.',
     },
     tags: ['SDD', 'Claude Code', 'Cursor'],
   },
@@ -138,7 +141,8 @@ export const skills: { group: Localized; items: string[] }[] = [
   {
     group: { pt: 'IA', en: 'AI' },
     items: [
-      'Claude API',
+      'Gemini API',
+      'OpenAI API',
       'LLM Agents',
       'Prompt Orchestration',
       'RAG',
@@ -175,7 +179,9 @@ export const marquee = [
   'Angular',
   'React',
   'Vue',
-  'Claude API',
+  'Gemini',
+  'OpenAI',
+  'Claude Code',
   'Node.js',
   'Python',
   '.NET',
@@ -208,15 +214,15 @@ export const experience: {
       pt: [
         'Plataformas web para processamento e análise de dados de poços de petróleo para Petrobras, Petronas, Shell e CNOOC, em projetos de múltiplos milhões de reais.',
         'Entrega ponta a ponta: prototipação de telas (UX), front-end, backend e banco de dados, com interfaces limpas, dinâmicas e instruções claras de uso.',
-        'Integração da Claude API nas plataformas e automação de CI/CD com Docker.',
+        'Uso de Claude com Spec-Driven Development (SDD) para acelerar o desenvolvimento das plataformas, além da automação de CI/CD com Docker.',
       ],
       en: [
         'Web platforms for well data processing and analysis for Petrobras, Petronas, Shell and CNOOC, in multi-million (BRL) projects.',
         'End-to-end ownership: UX prototyping, front-end, backend and database, with clean, dynamic interfaces and clear user guidance.',
-        'Integrated the Claude API into the platforms and automated CI/CD pipelines with Docker.',
+        'Adopted Claude with Spec-Driven Development (SDD) to speed up platform development, and automated CI/CD pipelines with Docker.',
       ],
     },
-    tags: ['Claude API', 'Full-Stack', 'UX', 'Docker', 'CI/CD'],
+    tags: ['Full-Stack', 'UX', 'SDD', 'Claude Code', 'Docker', 'CI/CD'],
   },
   {
     company: 'Vonex.AI',
@@ -231,18 +237,18 @@ export const experience: {
     bullets: {
       pt: [
         'Plataforma de atendimento omnichannel com IA para Samsung, Carrefour, Jequiti, Consigaz e outras empresas, com milhares de mensagens diárias.',
-        'Fluxos de atendimento automatizados 24/7 com agentes de IA, para um atendimento completo e personalizado a cada cliente.',
+        'Integração das APIs do Google Gemini e da OpenAI (ChatGPT) em fluxos de atendimento 24/7 com agentes de IA, para um atendimento completo e personalizado a cada cliente.',
         'Disparo de campanhas publicitárias com milhares de envios.',
         'Liderança do time de front-end por um período.',
       ],
       en: [
         'Omnichannel customer service platform with AI for Samsung, Carrefour, Jequiti, Consigaz and others, handling thousands of messages daily.',
-        'Designed 24/7 automated support flows with AI agents, delivering complete and personalized service to each customer.',
+        'Integrated Google Gemini and OpenAI (ChatGPT) APIs into 24/7 automated support flows with AI agents, delivering complete and personalized service to each customer.',
         'Delivered advertising campaign dispatch with thousands of sends.',
         'Led the front-end team for a period.',
       ],
     },
-    tags: ['AI Agents', 'LLM', 'Front-End', 'Leadership'],
+    tags: ['Gemini API', 'OpenAI API', 'AI Agents', 'Front-End', 'Leadership'],
   },
   {
     company: 'IBM',
@@ -361,5 +367,5 @@ export const spokenLanguages: { name: Localized; level: Localized; percent: numb
     level: { pt: 'Nativo', en: 'Native' },
     percent: 100,
   },
-  { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Avançado', en: 'Advanced' }, percent: 85 },
+  { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Avançado', en: 'Advanced' }, percent: 80 },
 ];
