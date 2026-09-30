@@ -11,6 +11,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const total = testimonials.length;
 const initials = (name: string) =>
   name
     .split(' ')
@@ -27,11 +28,32 @@ const initials = (name: string) =>
       label={t('testimonials.label')}
       title={t('testimonials.title')}
     />
+  </div>
 
-    <ul class="grid gap-5 lg:grid-cols-3">
-      {testimonials.map((item) => (
-        <li class="card flex flex-col p-7" data-reveal>
-          <figure class="flex h-full flex-col">
+  <div
+    class="container-page"
+    data-carousel
+    role="region"
+    aria-roledescription="carousel"
+    aria-label={t('testimonials.label')}
+    data-reveal
+  >
+    <div
+      id="testimonials-track"
+      data-track
+      aria-live="off"
+      class="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain py-4 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      <div class="w-[7.5%] shrink-0 sm:w-[15%] lg:w-[21%]" aria-hidden="true"></div>
+      {testimonials.map((item, i) => (
+        <div
+          data-slide
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${i + 1} ${t('carousel.of')} ${total}`}
+          class="w-[85%] shrink-0 snap-center px-2 sm:w-[70%] sm:px-3 lg:w-[58%]"
+        >
+          <figure class="card flex h-full flex-col p-6 sm:p-9">
             <svg
               class="size-8 text-brand-400/60"
               viewBox="0 0 32 32"
@@ -40,7 +62,7 @@ const initials = (name: string) =>
             >
               <path d="M9.3 25c-2.6 0-4.8-2.1-4.8-5.3 0-5 3.6-10 9-12.2l1 1.6c-3 1.6-4.8 4-5.1 6.5 2.7-.3 4.6 1.6 4.6 4.1 0 3-2 5.3-4.7 5.3Zm13.4 0c-2.6 0-4.8-2.1-4.8-5.3 0-5 3.6-10 9-12.2l1 1.6c-3 1.6-4.8 4-5.1 6.5 2.7-.3 4.6 1.6 4.6 4.1 0 3-2 5.3-4.7 5.3Z" />
             </svg>
-            <blockquote class="mt-4 flex-1 leading-relaxed text-pretty text-fg/90">
+            <blockquote class="mt-4 flex-1 leading-relaxed text-pretty text-fg/90 sm:text-lg">
               <p>{item.quote[lang]}</p>
             </blockquote>
             {item.translatedFrom && item.translatedFrom !== lang && (
@@ -66,20 +88,78 @@ const initials = (name: string) =>
               </div>
             </figcaption>
           </figure>
-        </li>
+        </div>
       ))}
-    </ul>
+      <div class="w-[7.5%] shrink-0 sm:w-[15%] lg:w-[21%]" aria-hidden="true"></div>
+    </div>
 
-    <p class="mt-8 text-center" data-reveal>
-      <a
-        href={profile.social.linkedin}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 font-mono text-sm text-link hover:underline"
+    <div data-controls class="mt-6 flex items-center justify-center gap-2">
+      <button
+        type="button"
+        data-prev
+        aria-controls="testimonials-track"
+        aria-label={t('carousel.prev')}
+        class="grid size-10 place-items-center rounded-full border border-line text-muted transition-colors hover:border-brand-400/50 hover:text-fg"
       >
-        <Icon name="linkedin" size={14} />
-        {t('testimonials.more')}
-      </a>
-    </p>
+        <Icon name="chevron-left" size={18} />
+      </button>
+      <div class="flex items-center px-1">
+        {testimonials.map((_, i) => (
+          <button
+            type="button"
+            data-dot
+            aria-controls="testimonials-track"
+            aria-label={`${t('carousel.goTo')} ${i + 1}`}
+            class="group px-1 py-3"
+          >
+            <span class="relative block h-1.5 w-1.5 overflow-hidden rounded-full bg-line transition-all duration-300 group-hover:bg-muted group-aria-[current=true]:w-8 group-aria-[current=true]:bg-surface-2">
+              <span
+                data-fill
+                class="carousel-fill absolute inset-0 origin-left rounded-full bg-accent"
+              />
+            </span>
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        data-next
+        aria-controls="testimonials-track"
+        aria-label={t('carousel.next')}
+        class="grid size-10 place-items-center rounded-full border border-line text-muted transition-colors hover:border-brand-400/50 hover:text-fg"
+      >
+        <Icon name="chevron-right" size={18} />
+      </button>
+      <button
+        type="button"
+        data-toggle
+        aria-controls="testimonials-track"
+        aria-label={t('carousel.pause')}
+        data-label-pause={t('carousel.pause')}
+        data-label-play={t('carousel.play')}
+        class="group ml-1 grid size-10 place-items-center rounded-full text-muted transition-colors hover:text-fg"
+      >
+        <Icon name="pause" size={14} class="group-data-[state=paused]:hidden" />
+        <Icon name="play" size={14} class="hidden group-data-[state=paused]:block" />
+      </button>
+    </div>
   </div>
+
+  <p class="container-page mt-6 text-center">
+    <a
+      href={profile.social.linkedin}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-2 font-mono text-sm text-link hover:underline"
+    >
+      <Icon name="linkedin" size={14} />
+      {t('testimonials.more')}
+    </a>
+  </p>
 </section>
+
+<script>
+  import { initCarousel } from '@/scripts/carousel';
+
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(initCarousel);
+</script>

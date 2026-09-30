@@ -86,3 +86,42 @@ test('mobile menu opens and closes', async ({ page, isMobile }) => {
   await expect(page.locator('#mobile-menu')).toBeHidden();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
+
+test.describe('testimonials carousel', () => {
+  test('arrows and dots change the highlighted slide', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/en/');
+    const carousel = page.locator('[data-carousel]');
+    const slides = carousel.locator('[data-slide]');
+    await carousel.scrollIntoViewIfNeeded();
+
+    await expect(slides.nth(0)).toHaveAttribute('data-active', '');
+    await carousel.locator('[data-next]').click();
+    await expect(slides.nth(1)).toHaveAttribute('data-active', '');
+    await carousel.locator('[data-dot]').nth(3).click();
+    await expect(slides.nth(3)).toHaveAttribute('data-active', '');
+    await expect(carousel.locator('[data-dot]').nth(3)).toHaveAttribute('aria-current', 'true');
+    await carousel.locator('[data-prev]').click();
+    await expect(slides.nth(2)).toHaveAttribute('data-active', '');
+  });
+
+  test('autoplay is disabled for reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const carousel = page.locator('[data-carousel]');
+    await expect(carousel).toHaveAttribute('data-autoplay', 'false');
+    await expect(carousel.locator('[data-toggle]')).toHaveCount(0);
+  });
+
+  test('pause button stops autoplay', async ({ page }) => {
+    await page.goto('/');
+    const carousel = page.locator('[data-carousel]');
+    await carousel.scrollIntoViewIfNeeded();
+    const toggle = carousel.locator('[data-toggle]');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('data-state', 'paused');
+    await expect(carousel).toHaveAttribute('data-paused', '');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('data-state', 'playing');
+  });
+});

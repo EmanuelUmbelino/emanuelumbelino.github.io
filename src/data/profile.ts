@@ -394,6 +394,39 @@ export const testimonials: {
     },
     translatedFrom: 'pt',
   },
+  {
+    name: 'Felipe de Rossi Rezende',
+    role: {
+      pt: 'Senior Frontend Developer na Vonex.AI',
+      en: 'Senior Frontend Developer at Vonex.AI',
+    },
+    linkedin: 'https://www.linkedin.com/in/felipederossirezende/',
+    quote: {
+      pt: 'Trabalhei com o Emanuel durante dois anos no time de Frontend da Vonex.AI. Sempre se destacou pelo comprometimento, pela colaboração com o time e pela capacidade de propor soluções para problemas complexos. Também teve participação importante em decisões técnicas, contribuindo com a evolução do projeto como um todo.',
+      en: 'I worked with Emanuel for two years on the Vonex.AI front-end team. He always stood out for his commitment, his collaboration with the team and his ability to propose solutions to complex problems. He also played an important role in technical decisions, contributing to the evolution of the project as a whole.',
+    },
+    translatedFrom: 'pt',
+  },
+  {
+    name: 'Lucas Rehem',
+    role: { pt: 'Product Owner na Vonex.AI', en: 'Product Owner at Vonex.AI' },
+    linkedin: 'https://www.linkedin.com/in/lucas-s-rehem/',
+    quote: {
+      pt: 'Front-end sênior de verdade: manda bem no código, entende o produto e sempre chega com uma ideia pra deixar a experiência melhor. Como PO, era tranquilo demais alinhar qualquer coisa com ele. Quem contratar vai ganhar um baita profissional.',
+      en: 'A true senior front-end engineer: great at code, understands the product and always comes with an idea to make the experience better. As a PO, aligning anything with him was a breeze. Whoever hires him will gain an outstanding professional.',
+    },
+    translatedFrom: 'pt',
+  },
+  {
+    name: 'Camila Prudêncio Alves',
+    role: { pt: 'Senior Product Owner na Vonex.AI', en: 'Senior Product Owner at Vonex.AI' },
+    linkedin: 'https://www.linkedin.com/in/camila-prud%C3%AAncio-alves-008421116/',
+    quote: {
+      pt: 'É inteligente, comunicativo e muito flexível, conseguindo se adaptar bem às diferentes demandas e desafios do dia a dia. Além do conhecimento técnico, é uma pessoa colaborativa, comprometida e sempre disposta a ajudar o time a encontrar as melhores soluções.',
+      en: 'He is smart, communicative and very flexible, adapting well to different demands and day-to-day challenges. Beyond his technical knowledge, he is collaborative, committed and always willing to help the team find the best solutions.',
+    },
+    translatedFrom: 'pt',
+  },
 ];
 
 export const education: { school: string; degree: Localized; period: Localized }[] = [
