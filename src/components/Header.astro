@@ -70,6 +70,7 @@ const href = (id: string) => (absoluteLinks ? `${home}#${id}` : `#${id}`);
       <a
         href={homePath(otherLang)}
         hreflang={otherLang}
+        data-lang-switch={otherLang}
         lang={otherLang}
         aria-label={t('lang.switch')}
         title={t('lang.switch')}

@@ -10,8 +10,8 @@ const pt = useTranslations('pt');
 const en = useTranslations('en');
 ---
 
-<Base lang="pt" title={`404 — ${pt('notFound.title')}`} alternates={false} noindex>
-  <Header lang="pt" absoluteLinks />
+<Base lang="en" title={`404 — ${en('notFound.title')}`} alternates={false} noindex>
+  <Header lang="en" absoluteLinks />
   <main
     id="main"
     class="relative isolate grid min-h-dvh place-items-center overflow-hidden px-4 pt-16"
@@ -21,23 +21,23 @@ const en = useTranslations('en');
       <p class="text-gradient font-mono text-8xl font-extrabold tracking-tighter sm:text-9xl">
         404
       </p>
-      <h1 class="mt-6 text-2xl font-bold tracking-tight sm:text-3xl">{pt('notFound.title')}</h1>
-      <p class="mt-3 text-muted">{pt('notFound.text')}</p>
-      <p class="mt-1 text-sm text-muted" lang="en">
-        {en('notFound.text')}
+      <h1 class="mt-6 text-2xl font-bold tracking-tight sm:text-3xl">{en('notFound.title')}</h1>
+      <p class="mt-3 text-muted">{en('notFound.text')}</p>
+      <p class="mt-1 text-sm text-muted" lang="pt-BR">
+        {pt('notFound.text')}
       </p>
       <div class="mt-10 flex flex-wrap justify-center gap-3">
         <a href="/" class="btn-primary">
-          {pt('notFound.back')}
+          {en('notFound.back')}
           <Icon name="arrow-right" size={16} />
         </a>
-        <a href="/en/" class="btn-ghost" lang="en">
-          {en('notFound.back')}
+        <a href="/pt/" class="btn-ghost" lang="pt-BR">
+          {pt('notFound.back')}
         </a>
       </div>
     </div>
   </main>
-  <Footer lang="pt" />
+  <Footer lang="en" />
 </Base>
 
 <script>

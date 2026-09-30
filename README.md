@@ -3,14 +3,14 @@
 [![Deploy](https://github.com/EmanuelUmbelino/emanuelumbelino.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/EmanuelUmbelino/emanuelumbelino.github.io/actions/workflows/deploy.yml)
 
 Personal portfolio of **Emanuel Umbelino**, a full-stack software engineer specialized in AI and automation.
-🔗 **https://emanuelumbelino.github.io** · Portuguese at `/`, English at [`/en/`](https://emanuelumbelino.github.io/en/)
+🔗 **https://emanuelumbelino.github.io** · English at `/`, Portuguese at [`/pt/`](https://emanuelumbelino.github.io/pt/)
 
 ## Tech stack
 
 - [Astro](https://astro.build): static site, zero JavaScript by default
 - [Tailwind CSS v4](https://tailwindcss.com): design tokens with a palette built around `#002882`, light and dark themes
 - TypeScript (strictest)
-- i18n: Brazilian Portuguese (`/`) and English (`/en/`)
+- i18n: English (`/`) and Brazilian Portuguese (`/pt/`); Portuguese-speaking browsers are sent to `/pt/` on their first visit, and a manual language switch is remembered. Old `/en/` links redirect to `/`
 - Playwright + axe-core: end-to-end and accessibility tests (WCAG 2 AA)
 - Lighthouse CI: performance, accessibility, best-practices and SEO budgets
 - GitHub Actions: CI on pull requests and automatic deploy to GitHub Pages
@@ -46,7 +46,7 @@ src/
 ├── data/          typed, bilingual content
 ├── i18n/          translations and helpers
 ├── layouts/       <head>, SEO, JSON-LD, theme
-├── pages/         / (pt), /en/, 404
+├── pages/         / (en), /pt/, 404
 ├── scripts/       client-side interactions (theme, menu, typing, reveal)
 └── styles/        Tailwind and color tokens
 tests/             Playwright + axe

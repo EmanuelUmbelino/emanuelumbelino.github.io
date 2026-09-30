@@ -11,9 +11,18 @@ interface Props {
   /** Emit hreflang alternates (only for pages that exist in every language). */
   alternates?: boolean;
   noindex?: boolean;
+  /** Send Portuguese-speaking visitors to /pt/ unless they picked a language before. */
+  detectLanguage?: boolean;
 }
 
-const { lang, title, description, alternates = true, noindex = false } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  alternates = true,
+  noindex = false,
+  detectLanguage = false,
+} = Astro.props;
 const t = useTranslations(lang);
 
 const pageTitle = title ?? t('meta.title');
@@ -88,6 +97,17 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {detectLanguage && <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('lang');
+          const browser = (navigator.languages?.[0] || navigator.language || '').toLowerCase();
+          if (saved === 'pt' || (!saved && browser.startsWith('pt'))) {
+            location.replace('/pt/' + location.hash);
+          }
+        } catch {}
+      })();
+    </script>}
     <!-- Apply theme before paint to avoid a flash. Dark is the default. -->
     <script is:inline>
       (() => {

@@ -13,6 +13,19 @@ function initTheme() {
   });
 }
 
+function initLanguageSwitch() {
+  // Remember an explicit choice so the root page stops auto-redirecting.
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+    link.addEventListener('click', () => {
+      try {
+        localStorage.setItem('lang', link.dataset['langSwitch'] ?? '');
+      } catch {
+        // storage unavailable — the link still navigates
+      }
+    });
+  });
+}
+
 function initHeader() {
   const header = document.querySelector<HTMLElement>('[data-header]');
   if (!header) return;
@@ -132,6 +145,7 @@ function initCopy() {
 }
 
 initTheme();
+initLanguageSwitch();
 initHeader();
 initMenu();
 initTyping();

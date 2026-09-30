@@ -7,16 +7,18 @@ export default defineConfig({
   site: 'https://emanuelumbelino.github.io',
   trailingSlash: 'ignore',
   devToolbar: { enabled: false },
+  // English moved to the root; keep old /en/ links working.
+  redirects: { '/en': '/' },
   i18n: {
-    locales: ['pt', 'en'],
-    defaultLocale: 'pt',
+    locales: ['en', 'pt'],
+    defaultLocale: 'en',
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'pt',
-        locales: { pt: 'pt-BR', en: 'en' },
+        defaultLocale: 'en',
+        locales: { en: 'en', pt: 'pt-BR' },
       },
     }),
   ],

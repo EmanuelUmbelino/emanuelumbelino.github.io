@@ -4,15 +4,15 @@ import AxeBuilder from '@axe-core/playwright';
 const pages = [
   {
     path: '/',
-    lang: 'pt-BR',
-    heading: 'Emanuel Umbelino',
-    contact: 'Vamos construir algo juntos?',
-  },
-  {
-    path: '/en/',
     lang: 'en',
     heading: 'Emanuel Umbelino',
     contact: "Let's build something together?",
+  },
+  {
+    path: '/pt/',
+    lang: 'pt-BR',
+    heading: 'Emanuel Umbelino',
+    contact: 'Vamos construir algo juntos?',
   },
 ];
 
@@ -62,9 +62,39 @@ test('theme toggle persists the choice', async ({ page }) => {
 });
 
 test('language switch goes to the other locale', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/pt/');
   await page.getByRole('link', { name: 'Switch to English' }).click();
-  await expect(page).toHaveURL(/\/en\/?$/);
+  await expect(page).toHaveURL(/:\d+\/$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test.describe('language detection', () => {
+  test.use({ locale: 'pt-BR' });
+
+  test('Portuguese browsers are sent to /pt/ from the root', async ({ page }) => {
+    await page.goto('/');
+    await expect(page).toHaveURL(/\/pt\/$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  });
+
+  test('a manual switch to English is remembered', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Switch to English' }).click();
+    await expect(page).toHaveURL(/:\d+\/$/);
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+});
+
+test('other browsers stay on English at the root', async ({ page }) => {
+  await page.goto('/');
+  await expect(page).toHaveURL(/:\d+\/$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('old /en/ links redirect to the root', async ({ page }) => {
+  await page.goto('/en/');
+  await expect(page).toHaveURL(/:\d+\/$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });
 
@@ -78,7 +108,7 @@ test('CV files are served', async ({ request }) => {
 
 test('mobile menu opens and closes', async ({ page, isMobile }) => {
   test.skip(!isMobile, 'mobile only');
-  await page.goto('/');
+  await page.goto('/pt/');
   const toggle = page.locator('[data-menu-toggle]');
   await toggle.click();
   await expect(page.locator('#mobile-menu')).toBeVisible();
@@ -90,7 +120,7 @@ test('mobile menu opens and closes', async ({ page, isMobile }) => {
 test.describe('testimonials carousel', () => {
   test('arrows and dots change the highlighted slide', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/en/');
+    await page.goto('/');
     const carousel = page.locator('[data-carousel]');
     const slides = carousel.locator('[data-slide]');
     await carousel.scrollIntoViewIfNeeded();

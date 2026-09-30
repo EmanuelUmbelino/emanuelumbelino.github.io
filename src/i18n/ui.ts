@@ -1,10 +1,10 @@
 export const languages = {
-  pt: 'Português',
   en: 'English',
+  pt: 'Português',
 } as const;
 
 export type Lang = keyof typeof languages;
-export const defaultLang: Lang = 'pt';
+export const defaultLang: Lang = 'en';
 
 /** Value translated into every supported language. */
 export type Localized<T = string> = Record<Lang, T>;
