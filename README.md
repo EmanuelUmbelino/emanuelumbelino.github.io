@@ -32,7 +32,7 @@ npm run test:e2e     # Playwright (rode depois do build)
 
 Todo o conteúdo fica em [`src/data/profile.ts`](src/data/profile.ts): experiências, projetos, skills, formação e links. Os textos de interface ficam em [`src/i18n/ui.ts`](src/i18n/ui.ts). Os componentes cuidam só do layout.
 
-- **Foto:** `src/assets/face.webp` (fundo transparente; é otimizada no build)
+- **Foto:** `src/assets/face.jpg` (quadrada, em alta resolução; o Astro gera versões otimizadas no build)
 - **Currículos:** `public/cv/Emanuel_Umbelino_PT.pdf` e `public/cv/Emanuel_Umbelino_EN.pdf`
 - **Badge "Aberto a oportunidades":** `profile.openToWork`
 - **Imagens de compartilhamento:** `public/og-pt.png`, `public/og-en.png` (1200×630)

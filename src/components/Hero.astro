@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
-import face from '@/assets/face.webp';
+import face from '@/assets/face.jpg';
 import { profile } from '@/data/profile';
 import type { Lang } from '@/i18n/ui';
 import { useTranslations } from '@/i18n/utils';
@@ -105,19 +105,16 @@ const roles = profile.roles[lang];
           class="absolute -inset-12 hidden rounded-full border border-line/60 sm:block"
           aria-hidden="true"
         ></div>
-        <div
-          class="absolute inset-0 rounded-full bg-gradient-to-br from-brand-500 via-brand-800 to-brand-950 shadow-2xl shadow-brand-600/30"
-          aria-hidden="true"
-        ></div>
-        <div class="absolute inset-0 overflow-hidden rounded-full">
+        <div class="absolute inset-0 overflow-hidden rounded-full bg-brand-900 shadow-2xl ring-4 shadow-brand-600/30 ring-brand-800/70">
           <Image
             src={face}
             alt={t('hero.photo')}
-            widths={[224, 320, 384, 547]}
+            widths={[224, 320, 384, 448, 640, 768, 1024]}
             sizes="(min-width: 1024px) 384px, (min-width: 640px) 320px, 224px"
+            quality={90}
             loading="eager"
             fetchpriority="high"
-            class="size-full scale-110 object-cover object-top pt-4"
+            class="size-full object-cover"
           />
         </div>
         <!-- Floating badges -->
