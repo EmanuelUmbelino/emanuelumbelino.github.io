@@ -117,6 +117,8 @@ const jsonLd = {
     <meta name="description" content={pageDescription} />
     <meta name="author" content={profile.name} />
     <meta name="generator" content={Astro.generator} />
+    <!-- Google Search Console ownership; removing it unverifies the property. -->
+    <meta name="google-site-verification" content="aW4SQ90h61S2cZMKw__2PU0R0E7PkfrucIeohApvTmQ" />
     <meta
       name="robots"
       content={noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1'}
