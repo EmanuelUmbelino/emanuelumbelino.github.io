@@ -2,7 +2,7 @@
 import '@/styles/global.css';
 import { htmlLang, languages, ogLocale, type Lang } from '@/i18n/ui';
 import { homePath, useTranslations } from '@/i18n/utils';
-import { profile } from '@/data/profile';
+import { education, experience, profile, spokenLanguages } from '@/data/profile';
 
 interface Props {
   lang: Lang;
@@ -29,30 +29,82 @@ const pageTitle = title ?? t('meta.title');
 const pageDescription = description ?? t('meta.description');
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(`/og-${lang}.png`, Astro.site);
+const otherLangs = (Object.keys(languages) as Lang[]).filter((l) => l !== lang);
+
+// Linked graph so search engines read the home pages as a ProfilePage about one Person.
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(homePath(lang), Astro.site).href;
+const personId = `${siteUrl}#person`;
+const websiteId = `${siteUrl}#website`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: profile.name,
-  jobTitle: profile.headline[lang],
-  description: pageDescription,
-  url: new URL(homePath(lang), Astro.site).href,
-  image: new URL('/og-avatar.png', Astro.site).href,
-  email: `mailto:${profile.email}`,
-  address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' },
-  alumniOf: {
-    '@type': 'CollegeOrUniversity',
-    name: 'Pontifícia Universidade Católica do Rio de Janeiro',
-  },
-  knowsAbout: [
-    'Software Engineering',
-    'Full-Stack Development',
-    'AI Agents',
-    'LLM',
-    'UX',
-    'TypeScript',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteUrl,
+      name: profile.name,
+      inLanguage: Object.values(htmlLang),
+      publisher: { '@id': personId },
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageTitle,
+      description: pageDescription,
+      inLanguage: htmlLang[lang],
+      isPartOf: { '@id': websiteId },
+      mainEntity: { '@id': personId },
+    },
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: profile.name,
+      givenName: profile.firstName,
+      familyName: profile.lastName,
+      jobTitle: profile.headline[lang],
+      description: profile.intro[lang],
+      url: pageUrl,
+      image: new URL('/og-avatar.png', Astro.site).href,
+      email: profile.email,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Rio de Janeiro',
+        addressCountry: 'BR',
+      },
+      worksFor: experience
+        .filter((job) => job.end === null)
+        .map((job) => ({ '@type': 'Organization', name: job.company })),
+      alumniOf: [
+        {
+          '@type': 'CollegeOrUniversity',
+          name: 'Pontifícia Universidade Católica do Rio de Janeiro',
+          alternateName: 'PUC-Rio',
+        },
+        ...education
+          .filter((e) => e.school !== 'PUC-Rio')
+          .map((e) => ({ '@type': 'EducationalOrganization', name: e.school })),
+      ],
+      knowsLanguage: spokenLanguages.map((l) => l.name.en),
+      knowsAbout: [
+        'Software Engineering',
+        'Full-Stack Development',
+        'Front-End Development',
+        'AI Agents',
+        'Large Language Models',
+        'LLM Automation',
+        'Spec-Driven Development',
+        'UX Design',
+        'TypeScript',
+        'Angular',
+        'React',
+        'Node.js',
+      ],
+      sameAs: [profile.social.github, profile.social.linkedin],
+    },
   ],
-  sameAs: [profile.social.github, profile.social.linkedin],
 };
 ---
 
@@ -65,8 +117,11 @@ const jsonLd = {
     <meta name="description" content={pageDescription} />
     <meta name="author" content={profile.name} />
     <meta name="generator" content={Astro.generator} />
-    {noindex && <meta name="robots" content="noindex" />}
-    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
+    {!noindex && <link rel="canonical" href={canonical} />}
     {alternates &&
       (Object.keys(languages) as Lang[]).map((l) => (
         <link rel="alternate" hreflang={htmlLang[l]} href={new URL(homePath(l), Astro.site)} />
@@ -88,15 +143,20 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={t('meta.imageAlt')} />
     <meta property="og:locale" content={ogLocale[lang]} />
+    {alternates &&
+      otherLangs.map((l) => <meta property="og:locale:alternate" content={ogLocale[l]} />)}
     <meta property="profile:first_name" content={profile.firstName} />
     <meta property="profile:last_name" content={profile.lastName} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={t('meta.imageAlt')} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     {detectLanguage && <script is:inline>
       (() => {
         try {

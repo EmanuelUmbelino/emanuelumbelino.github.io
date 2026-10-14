@@ -16,7 +16,8 @@ export const ui = {
   pt: {
     'meta.title': 'Emanuel Umbelino — Engenheiro de Software · Full-Stack · IA',
     'meta.description':
-      'Engenheiro de software com 10+ anos de experiência, full-stack com forte base em front-end e UX, especialista em agentes de IA, automações com LLMs e Spec-Driven Development. Sistemas em produção para Petrobras, Shell, Samsung e Carrefour.',
+      'Engenheiro de software full-stack com 10+ anos de experiência, especialista em agentes de IA e automação com LLMs. Sistemas para Petrobras, Shell e Samsung.',
+    'meta.imageAlt': 'Emanuel Umbelino, engenheiro de software full-stack e especialista em IA',
     'nav.about': 'Sobre',
     'nav.ai': 'IA',
     'nav.stack': 'Stack',
@@ -85,7 +86,8 @@ export const ui = {
   en: {
     'meta.title': 'Emanuel Umbelino — Software Engineer · Full-Stack · AI',
     'meta.description':
-      'Software engineer with 10+ years of experience, full-stack with a strong front-end and UX background, specialized in AI agents, LLM-powered automation and Spec-Driven Development. Production systems for Petrobras, Shell, Samsung and Carrefour.',
+      'Full-stack software engineer with 10+ years of experience, specialized in AI agents and LLM automation. Production systems for Petrobras, Shell and Samsung.',
+    'meta.imageAlt': 'Emanuel Umbelino, full-stack software engineer and AI specialist',
     'nav.about': 'About',
     'nav.ai': 'AI',
     'nav.stack': 'Stack',

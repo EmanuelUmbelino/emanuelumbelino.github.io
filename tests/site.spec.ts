@@ -30,6 +30,21 @@ for (const p of pages) {
       await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveCount(1);
     });
 
+    test('exposes SEO metadata and structured data', async ({ page }) => {
+      await page.goto(p.path);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        new URL(p.path, 'https://emanuelumbelino.github.io').href,
+      );
+      const description = await page.locator('meta[name="description"]').getAttribute('content');
+      expect(description?.length ?? 0).toBeLessThanOrEqual(160);
+      const jsonLd = JSON.parse(
+        (await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}',
+      ) as { '@graph': { '@type': string }[] };
+      const types = jsonLd['@graph'].map((node) => node['@type']);
+      expect(types).toEqual(expect.arrayContaining(['WebSite', 'ProfilePage', 'Person']));
+    });
+
     test('has no horizontal overflow', async ({ page }) => {
       await page.goto(p.path);
       const overflow = await page.evaluate(
