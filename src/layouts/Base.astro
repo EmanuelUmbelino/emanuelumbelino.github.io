@@ -2,7 +2,8 @@
 import '@/styles/global.css';
 import { htmlLang, languages, ogLocale, type Lang } from '@/i18n/ui';
 import { homePath, useTranslations } from '@/i18n/utils';
-import { education, experience, profile, spokenLanguages } from '@/data/profile';
+import { education, experience, profile, projects, skills, spokenLanguages } from '@/data/profile';
+import { llmsFullPath } from '@/data/markdown';
 
 interface Props {
   lang: Lang;
@@ -55,6 +56,7 @@ const jsonLd = {
       name: pageTitle,
       description: pageDescription,
       inLanguage: htmlLang[lang],
+      dateModified: new Date().toISOString(),
       isPartOf: { '@id': websiteId },
       mainEntity: { '@id': personId },
     },
@@ -87,21 +89,40 @@ const jsonLd = {
           .filter((e) => e.school !== 'PUC-Rio')
           .map((e) => ({ '@type': 'EducationalOrganization', name: e.school })),
       ],
+      hasCredential: education.map((e) => ({
+        '@type': 'EducationalOccupationalCredential',
+        name: e.degree[lang],
+        credentialCategory: 'degree',
+        recognizedBy: { '@type': 'EducationalOrganization', name: e.school },
+      })),
       knowsLanguage: spokenLanguages.map((l) => l.name.en),
+      // Curated topics first, then every tool from the stack section.
       knowsAbout: [
-        'Software Engineering',
-        'Full-Stack Development',
-        'Front-End Development',
-        'AI Agents',
-        'Large Language Models',
-        'LLM Automation',
-        'Spec-Driven Development',
-        'UX Design',
-        'TypeScript',
-        'Angular',
-        'React',
-        'Node.js',
+        ...new Set([
+          'Software Engineering',
+          'Full-Stack Development',
+          'Front-End Development',
+          'AI Agents',
+          'Large Language Models',
+          'LLM Automation',
+          'Spec-Driven Development',
+          'UX Design',
+          'TypeScript',
+          'Angular',
+          'React',
+          'Node.js',
+          ...skills.flatMap((s) => s.items),
+        ]),
       ],
+      workExample: projects.map((p) => ({
+        '@type': p.code ? 'SoftwareSourceCode' : 'CreativeWork',
+        name: p.name,
+        description: p.description[lang],
+        keywords: p.tags.join(', '),
+        ...(p.live && { url: p.live }),
+        ...(p.code && { url: p.code, codeRepository: p.code }),
+        creator: { '@id': personId },
+      })),
       sameAs: [profile.social.github, profile.social.linkedin],
     },
   ],
@@ -130,6 +151,14 @@ const jsonLd = {
       ))}
     {alternates && <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {!noindex && (
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={llmsFullPath(lang)}
+        title={`${profile.name} (Markdown)`}
+      />
+    )}
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />

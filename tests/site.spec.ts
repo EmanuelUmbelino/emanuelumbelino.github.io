@@ -40,9 +40,27 @@ for (const p of pages) {
       expect(description?.length ?? 0).toBeLessThanOrEqual(160);
       const jsonLd = JSON.parse(
         (await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}',
-      ) as { '@graph': { '@type': string }[] };
+      ) as { '@graph': { '@type': string; workExample?: unknown[]; hasCredential?: unknown[] }[] };
       const types = jsonLd['@graph'].map((node) => node['@type']);
       expect(types).toEqual(expect.arrayContaining(['WebSite', 'ProfilePage', 'Person']));
+      const person = jsonLd['@graph'].find((node) => node['@type'] === 'Person');
+      expect(person?.workExample?.length).toBeGreaterThan(0);
+      expect(person?.hasCredential?.length).toBeGreaterThan(0);
+      await expect(page.locator('link[rel="alternate"][type="text/markdown"]')).toHaveAttribute(
+        'href',
+        `${p.path}llms-full.txt`,
+      );
+    });
+
+    test('serves a Markdown profile for language models', async ({ request }) => {
+      const res = await request.get(`${p.path}llms-full.txt`);
+      expect(res.ok()).toBeTruthy();
+      expect(res.headers()['content-type']).toContain('text/plain');
+      const body = await res.text();
+      expect(body.startsWith('# Emanuel Umbelino\n')).toBeTruthy();
+      for (const text of ['PUC-Rio · GTEP', 'Vonex.AI', 'ShopList', 'umbelino.emanuel@gmail.com']) {
+        expect(body).toContain(text);
+      }
     });
 
     test('has no horizontal overflow', async ({ page }) => {
@@ -111,6 +129,23 @@ test('old /en/ links redirect to the root', async ({ page }) => {
   await page.goto('/en/');
   await expect(page).toHaveURL(/:\d+\/$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('llms.txt indexes the machine-readable resources', async ({ request }) => {
+  const res = await request.get('/llms.txt');
+  expect(res.ok()).toBeTruthy();
+  const body = await res.text();
+  expect(body.startsWith('# Emanuel Umbelino\n\n> ')).toBeTruthy();
+  expect(body).toContain('https://emanuelumbelino.github.io/llms-full.txt');
+  expect(body).toContain('https://emanuelumbelino.github.io/pt/llms-full.txt');
+});
+
+test('robots.txt allows AI crawlers and points to llms.txt', async ({ request }) => {
+  const body = await (await request.get('/robots.txt')).text();
+  expect(body).not.toMatch(/Disallow:\s*\/\s*$/m);
+  expect(body).toContain('User-agent: GPTBot');
+  expect(body).toContain('User-agent: ClaudeBot');
+  expect(body).toContain('llms.txt');
 });
 
 test('CV files are served', async ({ request }) => {

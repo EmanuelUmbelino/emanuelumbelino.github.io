@@ -21,7 +21,7 @@ Hero · companies and clients · about · AI & automation · tech stack · exper
 
 ## Getting started
 
-Requires Node.js 22.12+ (see `.nvmrc`).
+Requires Node.js 22.23.4+ (see `.nvmrc`).
 
 ```bash
 npm install
@@ -59,10 +59,10 @@ Other assets:
 src/
 ├── assets/        images optimized by Astro
 ├── components/    page sections (Hero, About, Experience…)
-├── data/          typed, bilingual content
+├── data/          typed, bilingual content and its Markdown rendering
 ├── i18n/          translations and helpers
 ├── layouts/       <head>, SEO, JSON-LD, theme
-├── pages/         / (en), /pt/, 404
+├── pages/         / (en), /pt/, 404, llms.txt endpoints
 ├── scripts/       client-side interactions (theme, menu, typing, reveal, carousel)
 └── styles/        Tailwind and color tokens
 tests/             Playwright + axe
@@ -74,6 +74,12 @@ tests/             Playwright + axe
 - On the root page, a small inline script sends browsers whose primary language is Portuguese to `/pt/` before the page renders.
 - Choosing a language with the EN/PT switch is stored in `localStorage` (`lang`) and always wins over detection.
 - Old `/en/` links redirect to `/` (configured in `astro.config.mjs`).
+
+## Machine and AI readability
+
+- JSON-LD graph in [`Base.astro`](src/layouts/Base.astro): `WebSite`, `ProfilePage` and `Person` with employers, credentials, skills and projects.
+- [`/llms.txt`](https://emanuelumbelino.github.io/llms.txt) follows [llmstxt.org](https://llmstxt.org) and links the full Markdown profile in English ([`/llms-full.txt`](https://emanuelumbelino.github.io/llms-full.txt)) and Portuguese ([`/pt/llms-full.txt`](https://emanuelumbelino.github.io/pt/llms-full.txt)). Both are generated at build time from [`src/data/profile.ts`](src/data/profile.ts) by [`src/data/markdown.ts`](src/data/markdown.ts), so they stay in sync with the pages.
+- `robots.txt` allows every crawler, lists the main AI crawlers explicitly and points to `llms.txt`. The sitemap carries `lastmod`.
 
 ## Recommendations carousel
 

@@ -42,7 +42,7 @@ export const profile = {
 };
 
 /** Companies I worked at, delivering the client projects below. */
-export const employers = ['PUC-Rio', 'Vonex.AI'];
+export const employers = ['PUC-Rio', 'Vonex.AI', 'IBM'];
 
 export const clients = [
   'Petrobras',
@@ -208,6 +208,9 @@ export const experience: {
   role: Localized;
   start: Localized;
   end: Localized | null;
+  /** ISO year-month for `<time datetime>` and structured data. */
+  startDate: string;
+  endDate?: string;
   mode: Localized;
   bullets: Localized<string[]>;
   tags: string[];
@@ -218,6 +221,7 @@ export const experience: {
     role: { pt: 'Desenvolvedor Full-Stack', en: 'Full-Stack Developer' },
     start: { pt: 'Nov 2019', en: 'Nov 2019' },
     end: null,
+    startDate: '2019-11',
     mode: { pt: 'Remoto', en: 'Remote' },
     bullets: {
       pt: [
@@ -242,6 +246,8 @@ export const experience: {
     },
     start: { pt: 'Ago 2022', en: 'Aug 2022' },
     end: { pt: 'Set 2026', en: 'Sep 2026' },
+    startDate: '2022-08',
+    endDate: '2026-09',
     mode: { pt: 'Remoto', en: 'Remote' },
     bullets: {
       pt: [
@@ -265,6 +271,8 @@ export const experience: {
     role: { pt: 'Estagiário em Pesquisa UX · Front-End', en: 'UX Research Intern · Front-End' },
     start: { pt: 'Set 2018', en: 'Sep 2018' },
     end: { pt: 'Out 2019', en: 'Oct 2019' },
+    startDate: '2018-09',
+    endDate: '2019-10',
     mode: { pt: 'Presencial', en: 'On-site' },
     bullets: {
       pt: [
