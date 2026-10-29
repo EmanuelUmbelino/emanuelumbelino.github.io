@@ -72,11 +72,11 @@ const href = (id: string) => (absoluteLinks ? `${home}#${id}` : `#${id}`);
         hreflang={otherLang}
         data-lang-switch={otherLang}
         lang={otherLang}
-        aria-label={t('lang.switch')}
         title={t('lang.switch')}
         class="rounded-lg px-2.5 py-2 font-mono text-xs font-semibold text-muted uppercase transition-colors hover:bg-surface-2 hover:text-fg"
       >
         {otherLang}
+        <span class="sr-only normal-case"> — {t('lang.switch')}</span>
       </a>
       <button
         type="button"

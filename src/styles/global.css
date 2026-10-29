@@ -22,8 +22,9 @@
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', monospace;
 
   --animate-marquee: marquee 40s linear infinite;
-  --animate-blink: blink 1s step-end infinite;
-  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
+  /* Decorative loops end within 5s (WCAG 2.2.2 Pause, Stop, Hide). */
+  --animate-blink: blink 1s step-end 5;
+  --animate-pulse-ring: pulse-ring 2s ease-out 2;
 
   @keyframes marquee {
     to {
