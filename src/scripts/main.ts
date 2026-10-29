@@ -71,6 +71,7 @@ function initTyping() {
   let chars = words[0]!.length;
   let deleting = true;
 
+  // One pass through the roles, then rest on the first (WCAG 2.2.2).
   const tick = () => {
     const current = words[word]!;
     chars += deleting ? -1 : 1;
@@ -78,6 +79,7 @@ function initTyping() {
 
     let delay = deleting ? 40 : 80;
     if (!deleting && chars === current.length) {
+      if (word === 0) return;
       deleting = true;
       delay = 2200;
     } else if (deleting && chars === 0) {

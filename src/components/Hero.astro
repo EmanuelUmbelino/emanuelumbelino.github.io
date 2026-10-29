@@ -50,8 +50,11 @@ const roles = profile.roles[lang];
       </h1>
 
       <p class="mt-5 h-8 font-mono text-lg text-fg sm:text-xl" aria-live="off">
-        <span class="mr-2 text-accent">&gt;</span>
-        <span data-typing data-words={JSON.stringify(roles)}>
+        <span class="mr-2 text-accent" aria-hidden="true">
+          &gt;
+        </span>
+        <span class="sr-only">{roles.join(', ')}</span>
+        <span data-typing data-words={JSON.stringify(roles)} aria-hidden="true">
           {roles[0]}
         </span>
         <span
@@ -131,7 +134,7 @@ const roles = profile.roles[lang];
     class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted uppercase transition-colors hover:text-fg lg:flex"
     aria-label={t('hero.scroll')}
   >
-    scroll
-    <Icon name="arrow-down" size={14} class="animate-bounce" />
+    {t('hero.scrollShort')}
+    <Icon name="arrow-down" size={14} class="animate-bounce [animation-iteration-count:4]" />
   </a>
 </section>

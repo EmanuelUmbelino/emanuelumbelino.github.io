@@ -76,7 +76,9 @@ for (const p of pages) {
         await page.addInitScript((t) => localStorage.setItem('theme', t), theme);
         await page.emulateMedia({ reducedMotion: 'reduce' });
         await page.goto(p.path);
-        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
+        const results = await new AxeBuilder({ page })
+          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'])
+          .analyze();
         expect(
           results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(', ')}`),
         ).toEqual([]);
