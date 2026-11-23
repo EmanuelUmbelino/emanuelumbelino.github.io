@@ -27,8 +27,8 @@ export const profile = {
     en: ['Software Engineer', 'Full-Stack Developer', 'AI Specialist', 'Front-End & UX'],
   } as Localized<string[]>,
   intro: {
-    pt: 'Engenheiro de software full-stack com mais de 10 anos de experiência, base forte em front-end e UX, e foco em IA aplicada — de agentes de atendimento a desenvolvimento guiado por especificação. Transformo problemas de negócio em produtos claros, rápidos e fáceis de usar.',
-    en: 'Full-stack software engineer with 10+ years of experience, a strong front-end and UX foundation, and a focus on applied AI — from customer service agents to spec-driven development. I turn business problems into clear, fast and easy-to-use products.',
+    pt: 'Engenheiro de software full-stack com mais de 7 anos de experiência, base forte em front-end e UX, e foco em IA aplicada — de agentes de atendimento a desenvolvimento guiado por especificação. Transformo problemas de negócio em produtos claros, rápidos e fáceis de usar.',
+    en: 'Full-stack software engineer with 7+ years of experience, a strong front-end and UX foundation, and a focus on applied AI — from customer service agents to spec-driven development. I turn business problems into clear, fast and easy-to-use products.',
   } as Localized,
   cv: {
     pt: '/cv/Emanuel_Umbelino_PT.pdf',
@@ -59,16 +59,16 @@ export const clients = [
 export const about = {
   paragraphs: {
     pt: [
-      'Programo desde os 15 anos e construo software profissionalmente há mais de 10. Sou full-stack, com uma base forte em front-end, UX e desenvolvimento de interfaces, e hoje me especializo em agentes de IA, automações com LLMs e Spec-Driven Development (SDD) assistido por IA.',
+      'Programo desde os 15 anos e construo software profissionalmente há mais de 7. Sou full-stack, com uma base forte em front-end, UX e desenvolvimento de interfaces, e hoje me especializo em agentes de IA, automações com LLMs e Spec-Driven Development (SDD) assistido por IA.',
       'Já entreguei sistemas em produção para Petrobras, Shell, Petronas, CNOOC, Samsung e Carrefour. Trabalho 100% remoto desde 2019, com clientes internacionais e em diferentes fusos. Tenho visão de produto: busco entender a necessidade de quem vai usar o sistema para entregar a solução certa — não só a tarefa do backlog.',
     ],
     en: [
-      "I've been programming since I was 15 and building software professionally for over 10 years. I'm full-stack with a strong front-end, UX and interface background, and today I specialize in AI agents, LLM-powered automation and AI-assisted Spec-Driven Development (SDD).",
+      "I've been programming since I was 15 and building software professionally for over 7 years. I'm full-stack with a strong front-end, UX and interface background, and today I specialize in AI agents, LLM-powered automation and AI-assisted Spec-Driven Development (SDD).",
       "I've delivered production systems for Petrobras, Shell, Petronas, CNOOC, Samsung and Carrefour. I've been fully remote since 2019, working across time zones with international clients. I'm product-minded: I focus on understanding what users actually need so I can deliver the right solution — not just the backlog ticket.",
     ],
   } as Localized<string[]>,
   stats: [
-    { value: '10+', label: { pt: 'anos de experiência', en: 'years of experience' } },
+    { value: '7+', label: { pt: 'anos de experiência', en: 'years of experience' } },
     { value: '9', label: { pt: 'clientes atendidos', en: 'clients served' } },
     {
       value: '4',
